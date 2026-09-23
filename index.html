@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Aethelbotics — Robotics, STEAM, Kits & STEM Lab for Schools</title>
+<meta name="description" content="Aethelbotics — Robotics & STEAM learning for Class 1-12, BTech, BCA, MCA. Kits, Final Year Projects & STEM Lab setup in schools at just ₹2 Lakhs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AETHELBOTICS — STYLES
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+    --bg: #04050d;
+    --surface: rgba(255, 255, 255, .05);
+    --surface2: rgba(255, 255, 255, .09);
+    --border: rgba(255, 255, 255, .1);
+    --txt: #e9edf7;
+    --muted: #8b93ab;
+    --cyan: #00e5ff;
+    --violet: #a855f7;
+    --pink: #ff2e93;
+    --green: #22e6a6;
+    --gold: #ffc93c;
+    --red: #ff4d6d;
+    --grad: linear-gradient(135deg, #00e5ff 0%, #a855f7 55%, #ff2e93 100%);
+    --grad-soft: linear-gradient(135deg, rgba(0, 229, 255, .15), rgba(168, 85, 247, .15), rgba(255, 46, 147, .12));
+    --shadow: 0 20px 60px -20px rgba(0, 0, 0, .85);
+    --radius: 20px;
+    --font: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --display: 'Space Grotesk', 'Outfit', sans-serif;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { font-family: var(--font); background: var(--bg); color: var(--txt); line-height: 1.65; overflow-x: hidden; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+img, svg { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; outline: none; border: none; background: none; }
+ul { list-style: none; }
+::selection { background: var(--violet); color: #fff; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #06070f; }
+::-webkit-scrollbar-thumb { background: linear-gradient(#00e5ff, #a855f7); border-radius: 20px; border: 2px solid #06070f; }
+.icon { width: 1em; height: 1em; display: inline-block; vertical-align: -.15em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+/* SCROLL PROGRESS + CURSOR GLOW */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: var(--grad); z-index: 9999; box-shadow: 0 0 15px rgba(0, 229, 255, .7); transition: width .1s linear; }
+.cursor-glow { position: fixed; width: 400px; height: 400px; border-radius: 50%; pointer-events: none; z-index: 1; opacity: 0; background: radial-gradient(circle, rgba(0, 229, 255, .12), rgba(168, 85, 247, .06) 40%, transparent 70%); transform: translate(-50%, -50%); transition: opacity .3s; mix-blend-mode: screen; }
+@media (max-width: 820px) { .cursor-glow { display: none; } }
+
+/* BACKGROUND FX */
+.bg-fx { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+.bg-fx .grid { position: absolute; inset: -2px; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 85%); -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 85%); }
+.blob { position: absolute; border-radius: 50%; filter: blur(110px); opacity: .5; animation: floatBlob 18s ease-in-out infinite; }
+.blob.b1 { width: 520px; height: 520px; background: #0b6cff; top: -180px; left: -140px; }
+.blob.b2 { width: 460px; height: 460px; background: #a855f7; top: 18%; right: -160px; animation-delay: -6s; }
+.blob.b3 { width: 420px; height: 420px; background: #ff2e93; bottom: -160px; left: 40%; animation-delay: -12s; }
+@keyframes floatBlob { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -40px) scale(1.08); } 66% { transform: translate(-25px, 25px) scale(.95); } }
+.floating-icons { position: absolute; inset: 0; }
+.fi { position: absolute; font-size: 3rem; opacity: .05; stroke-width: 1.2; animation: floatIcon 22s ease-in-out infinite; }
+.fi1 { top: 15%; left: 5%; color: var(--cyan); }
+.fi2 { top: 40%; right: 8%; animation-delay: -4s; color: var(--violet); }
+.fi3 { top: 68%; left: 12%; animation-delay: -8s; color: var(--pink); }
+.fi4 { top: 25%; right: 20%; animation-delay: -12s; color: var(--green); }
+.fi5 { bottom: 15%; right: 6%; animation-delay: -16s; color: var(--gold); }
+.fi6 { bottom: 30%; left: 30%; animation-delay: -20s; color: var(--cyan); }
+@keyframes floatIcon { 0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); } 33% { transform: translate(30px, -40px) rotate(15deg) scale(1.15); } 66% { transform: translate(-25px, 30px) rotate(-12deg) scale(.9); } }
+
+/* CONTAINER & TYPOGRAPHY */
+.container { width: min(1180px, 92%); margin: 0 auto; }
+.center { text-align: center; }
+h1, h2, h3, h4 { font-family: var(--display); line-height: 1.15; letter-spacing: -.02em; font-weight: 700; }
+.grad-txt { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.shimmer { background: linear-gradient(90deg, #00e5ff 0%, #a855f7 25%, #ff2e93 50%, #a855f7 75%, #00e5ff 100%); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmerMove 4s linear infinite; }
+@keyframes shimmerMove { to { background-position: -200% 0; } }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); padding: 8px 16px; border-radius: 40px; background: rgba(0, 229, 255, .07); border: 1px solid rgba(0, 229, 255, .22); margin-bottom: 18px; }
+.eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); animation: blink 1.5s infinite; }
+.section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 14px; }
+.section-sub { color: var(--muted); max-width: 640px; margin: 0 auto; font-size: 1.02rem; }
+section { padding: 90px 0; position: relative; }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 30px; border-radius: 50px; font-weight: 600; font-size: .98rem; cursor: pointer; transition: all .3s cubic-bezier(.2, .8, .2, 1); white-space: nowrap; border: 1px solid transparent; position: relative; overflow: hidden; }
+.btn-grad { background: var(--grad); color: #fff; box-shadow: 0 12px 35px -10px rgba(0, 229, 255, .55); }
+.btn-grad:hover { transform: translateY(-3px); box-shadow: 0 20px 45px -10px rgba(168, 85, 247, .65); }
+.btn-ghost { background: rgba(255, 255, 255, .04); border-color: var(--border); color: var(--txt); }
+.btn-ghost:hover { background: rgba(255, 255, 255, .09); border-color: rgba(0, 229, 255, .4); transform: translateY(-3px); }
+.btn-sm { padding: 10px 22px; font-size: .88rem; }
+.btn-block { width: 100%; }
+.btn .ripple { position: absolute; border-radius: 50%; transform: scale(0); background: rgba(255, 255, 255, .35); pointer-events: none; animation: rippleAnim .6s ease-out; }
+@keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+.btn-loader { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spinLoader .7s linear infinite; }
+.btn.loading .btn-label { display: none; }
+.btn.loading .btn-loader { display: block; }
+.btn.loading { pointer-events: none; opacity: .85; }
+@keyframes spinLoader { to { transform: rotate(360deg); } }
+
+/* NAVBAR */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 14px 0; transition: all .4s ease; background: rgba(4, 5, 13, .55); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid transparent; }
+.nav.scrolled { background: rgba(4, 5, 13, .88); border-bottom-color: var(--border); padding: 10px 0; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-size: 1.25rem; font-weight: 700; }
+.logo-mark { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--grad); color: #fff; font-size: .95rem; font-weight: 800; box-shadow: 0 0 25px rgba(0, 229, 255, .4); animation: logoPulse 3s ease-in-out infinite; }
+@keyframes logoPulse { 0%, 100% { box-shadow: 0 0 25px rgba(0, 229, 255, .4); } 50% { box-shadow: 0 0 40px rgba(168, 85, 247, .6); } }
+.logo-txt em { font-style: normal; color: var(--cyan); }
+.menu { display: flex; align-items: center; gap: 6px; }
+.menu a { padding: 9px 16px; border-radius: 40px; font-size: .92rem; font-weight: 500; color: var(--muted); transition: all .25s; position: relative; }
+.menu a:hover, .menu a.active { color: var(--txt); background: rgba(255, 255, 255, .06); }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.nav-cta { flex-shrink: 0; }
+.admin-btn { width: 42px; height: 42px; border-radius: 12px; cursor: pointer; position: relative; background: rgba(0, 229, 255, .08); border: 1px solid rgba(0, 229, 255, .3); color: var(--cyan); display: grid; place-items: center; font-size: 1.1rem; transition: all .3s; }
+.admin-btn:hover { background: rgba(0, 229, 255, .18); transform: translateY(-2px); box-shadow: 0 8px 20px -8px rgba(0, 229, 255, .6); }
+.admin-badge { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; background: var(--pink); color: #fff; border-radius: 30px; font-size: .68rem; font-weight: 800; display: grid; place-items: center; border: 2px solid var(--bg); line-height: 1; animation: badgePulse 2s infinite; }
+.admin-badge.hidden { display: none; }
+@keyframes badgePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 46, 147, .6); } 50% { box-shadow: 0 0 0 8px rgba(255, 46, 147, 0); } }
+.burger { display: none; flex-direction: column; gap: 5px; padding: 10px; cursor: pointer; border-radius: 12px; background: rgba(255, 255, 255, .05); border: 1px solid var(--border); }
+.burger span { width: 22px; height: 2px; background: var(--txt); border-radius: 3px; transition: .3s; }
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.menu-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, .6); z-index: 998; opacity: 0; pointer-events: none; transition: .3s; }
+.menu-backdrop.show { opacity: 1; pointer-events: auto; }
+
+/* HERO */
+.hero { padding: 170px 0 90px; position: relative; overflow: hidden; }
+#heroCanvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; z-index: 0; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+.hero-copy h1 { font-size: clamp(2.2rem, 5.5vw, 3.9rem); margin-bottom: 22px; }
+.hero-copy .lead { font-size: clamp(1rem, 1.6vw, 1.15rem); color: var(--muted); margin-bottom: 24px; max-width: 560px; }
+.hero-copy .lead b { color: var(--txt); font-weight: 600; }
+.typed-line { font-family: var(--display); font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 600; color: var(--cyan); margin-bottom: 30px; min-height: 1.6em; }
+.typed-line .cur { display: inline-block; width: 2px; height: 1.1em; background: var(--cyan); margin-left: 3px; vertical-align: -.15em; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+.hero-trust { display: flex; gap: 36px; flex-wrap: wrap; }
+.hero-trust div { display: flex; flex-direction: column; }
+.hero-trust b { font-family: var(--display); font-size: 1.55rem; color: var(--txt); }
+.hero-trust span { font-size: .82rem; color: var(--muted); }
+.hero-visual { position: relative; height: 420px; display: grid; place-items: center; }
+.ring { position: absolute; border-radius: 50%; border: 1px solid rgba(0, 229, 255, .12); animation: spinRing 30s linear infinite; }
+.ring.r1 { width: 340px; height: 340px; }
+.ring.r2 { width: 270px; height: 270px; border-color: rgba(168, 85, 247, .15); animation-duration: 22s; animation-direction: reverse; }
+.ring.r3 { width: 200px; height: 200px; border-color: rgba(255, 46, 147, .15); animation-duration: 16s; }
+@keyframes spinRing { to { transform: rotate(360deg); } }
+.hero-card { position: relative; z-index: 3; width: min(280px, 90%); background: rgba(10, 12, 24, .8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 26px; padding: 28px 24px; text-align: center; box-shadow: var(--shadow); animation: heroCardPulse 4s ease-in-out infinite; }
+@keyframes heroCardPulse { 0%, 100% { transform: translateY(0); box-shadow: 0 20px 60px -20px rgba(0,0,0,.85); } 50% { transform: translateY(-8px); box-shadow: 0 30px 70px -20px rgba(0,229,255,.35); } }
+.hero-card .chip { width: 54px; height: 54px; margin: 0 auto 16px; border-radius: 16px; display: grid; place-items: center; font-size: 1.5rem; background: var(--grad-soft); border: 1px solid rgba(0, 229, 255, .3); color: var(--cyan); }
+.hero-card h4 { font-size: 1.2rem; margin-bottom: 6px; }
+.hero-card p { font-size: .88rem; color: var(--muted); }
+.float-badge { position: absolute; display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 40px; font-size: .82rem; font-weight: 600; background: rgba(10, 12, 24, .85); backdrop-filter: blur(12px); border: 1px solid var(--border); box-shadow: var(--shadow); z-index: 4; animation: floatBadge 5s ease-in-out infinite; }
+.float-badge .icon { color: var(--cyan); font-size: 1rem; }
+.float-badge.f1 { top: 8%; left: -2%; }
+.float-badge.f2 { top: 52%; right: -4%; animation-delay: -1.6s; }
+.float-badge.f3 { bottom: 8%; left: 4%; animation-delay: -3.2s; }
+@keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+/* REVEAL + TILT */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; } .d5 { transition-delay: .5s; }
+.tilt-card { transform-style: preserve-3d; transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s, background .35s, box-shadow .35s; will-change: transform; }
+
+/* STATS STRIP */
+.stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 40px 34px; border-radius: 26px; background: linear-gradient(160deg, rgba(20, 25, 50, .65), rgba(10, 12, 24, .55)); border: 1px solid var(--border); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: relative; overflow: hidden; }
+.stats-strip::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 20%, rgba(0,229,255,.12), transparent 45%), radial-gradient(circle at 85% 80%, rgba(168,85,247,.12), transparent 45%); pointer-events: none; }
+.stat { text-align: center; position: relative; padding: 8px 6px; }
+.stat + .stat::before { content: ''; position: absolute; left: -10px; top: 20%; bottom: 20%; width: 1px; background: linear-gradient(180deg, transparent, rgba(255,255,255,.12), transparent); }
+.stat b { display: block; font-family: var(--display); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; margin-bottom: 4px; }
+.stat span { font-size: .85rem; color: var(--muted); letter-spacing: .02em; }
+
+/* CARDS */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px 26px; transition: all .35s cubic-bezier(.2,.8,.2,1); position: relative; overflow: hidden; }
+.card::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); background: radial-gradient(circle at 30% 0%, rgba(0,229,255,.15), transparent 60%); opacity: 0; transition: opacity .4s; pointer-events: none; }
+.card:hover::after { opacity: 1; }
+.card:hover { transform: translateY(-8px); border-color: rgba(0, 229, 255, .3); background: var(--surface2); box-shadow: 0 24px 50px -24px rgba(0, 0, 0, .9); }
+.card .icon-wrap { width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center; font-size: 1.4rem; margin-bottom: 18px; color: var(--cyan); background: var(--grad-soft); border: 1px solid rgba(0, 229, 255, .22); transition: transform .4s; }
+.card:hover .icon-wrap { transform: rotate(-8deg) scale(1.1); }
+.card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.card p { font-size: .93rem; color: var(--muted); }
+.program-card .tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--violet); background: rgba(168, 85, 247, .1); border: 1px solid rgba(168, 85, 247, .25); padding: 4px 12px; border-radius: 40px; margin-bottom: 14px; }
+.program-card ul { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.program-card li { font-size: .88rem; color: var(--muted); display: flex; gap: 9px; align-items: flex-start; }
+.program-card li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+.project-card .project-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.project-card h4 { font-size: 1.05rem; margin-bottom: 8px; }
+.project-card p { font-size: .88rem; color: var(--muted); }
+
+/* INCLUDED */
+.included-section { position: relative; padding: 90px 0; }
+.included-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; margin-top: 30px; }
+.included-card { position: relative; padding: 36px 28px 30px; border-radius: 22px; background: linear-gradient(160deg, rgba(20, 25, 50, .55), rgba(10, 12, 24, .55)); border: 1px solid var(--border); backdrop-filter: blur(14px); overflow: hidden; transition: all .4s cubic-bezier(.2,.8,.2,1); isolation: isolate; }
+.included-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: .5; transition: opacity .3s, height .3s; z-index: 2; }
+.included-card:hover::before { opacity: 1; height: 4px; }
+.included-card:hover { transform: translateY(-10px); border-color: rgba(0, 229, 255, .4); box-shadow: 0 30px 60px -25px rgba(0, 229, 255, .35); }
+.included-glow { position: absolute; top: -50%; right: -50%; width: 220px; height: 220px; background: radial-gradient(circle, rgba(0, 229, 255, .25), transparent 70%); border-radius: 50%; opacity: 0; transition: opacity .5s, transform .5s; z-index: 0; pointer-events: none; }
+.included-card:hover .included-glow { opacity: 1; transform: scale(1.3); }
+.included-icon { width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center; font-size: 1.6rem; margin-bottom: 22px; position: relative; z-index: 1; transition: transform .4s; }
+.included-card:hover .included-icon { transform: rotate(-6deg) scale(1.08); }
+.ii-1 { background: linear-gradient(135deg, rgba(0, 229, 255, .2), rgba(0, 229, 255, .06)); border: 1px solid rgba(0, 229, 255, .35); color: var(--cyan); box-shadow: 0 0 30px -8px rgba(0, 229, 255, .5); }
+.ii-2 { background: linear-gradient(135deg, rgba(168, 85, 247, .2), rgba(168, 85, 247, .06)); border: 1px solid rgba(168, 85, 247, .35); color: var(--violet); box-shadow: 0 0 30px -8px rgba(168, 85, 247, .5); }
+.ii-3 { background: linear-gradient(135deg, rgba(255, 46, 147, .2), rgba(255, 46, 147, .06)); border: 1px solid rgba(255, 46, 147, .35); color: var(--pink); box-shadow: 0 0 30px -8px rgba(255, 46, 147, .5); }
+.ii-4 { background: linear-gradient(135deg, rgba(255, 201, 60, .2), rgba(255, 201, 60, .06)); border: 1px solid rgba(255, 201, 60, .35); color: var(--gold); box-shadow: 0 0 30px -8px rgba(255, 201, 60, .5); }
+.included-num { position: absolute; top: 24px; right: 26px; font-family: var(--display); font-size: 2.6rem; font-weight: 800; line-height: 1; background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.02)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; z-index: 1; pointer-events: none; user-select: none; transition: all .4s; }
+.included-card:hover .included-num { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: .35; transform: scale(1.1); }
+.included-card h3 { position: relative; z-index: 1; font-size: 1.15rem; margin-bottom: 10px; color: #fff; }
+.included-card p { position: relative; z-index: 1; font-size: .92rem; color: var(--muted); line-height: 1.6; }
+.included-card:nth-child(1)::before { background: linear-gradient(90deg, #00e5ff, #00a8ff); }
+.included-card:nth-child(2)::before { background: linear-gradient(90deg, #a855f7, #7c3aed); }
+.included-card:nth-child(3)::before { background: linear-gradient(90deg, #ff2e93, #ff5ea6); }
+.included-card:nth-child(4)::before { background: linear-gradient(90deg, #ffc93c, #ffb020); }
+
+/* KITS */
+.kit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 30px 26px; transition: all .4s cubic-bezier(.2,.8,.2,1); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.kit-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: .6; transition: opacity .3s; }
+.kit-card:hover::before { opacity: 1; }
+.kit-card:hover { transform: translateY(-10px) scale(1.01); border-color: rgba(0, 229, 255, .35); box-shadow: 0 30px 60px -25px rgba(0, 229, 255, .35); background: var(--surface2); }
+.kit-visual { height: 140px; border-radius: 18px; margin-bottom: 20px; display: grid; place-items: center; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(0,229,255,.15), rgba(168,85,247,.15)); border: 1px solid var(--border); }
+.kit-visual::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.1), transparent 60%); }
+.kit-card:hover .kit-visual { animation: kitShake 1s ease-in-out; }
+@keyframes kitShake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-3deg) scale(1.03); } 75% { transform: rotate(3deg) scale(1.03); } }
+.kit-visual .kit-emoji { font-size: 3.4rem; filter: drop-shadow(0 0 20px rgba(0,229,255,.5)); z-index: 1; }
+.kit-card h3 { font-size: 1.25rem; margin-bottom: 8px; }
+.kit-card > p { font-size: .9rem; color: var(--muted); margin-bottom: 16px; }
+.kit-card ul { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+.kit-card li { font-size: .85rem; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; }
+.kit-card li::before { content: '▸'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+.kit-price-row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 12px; flex-wrap: wrap; }
+.kit-price { font-family: var(--display); font-size: 1.5rem; font-weight: 700; }
+.kit-price small { font-size: .72rem; color: var(--muted); text-decoration: line-through; margin-left: 6px; font-weight: 400; }
+.kit-price span { color: var(--cyan); }
+
+/* STEM LAB */
+.stem-lab { background: linear-gradient(135deg, rgba(0,229,255,.08), rgba(168,85,247,.08), rgba(255,46,147,.06)); border-radius: 32px; padding: 60px 50px; position: relative; overflow: hidden; border: 1px solid rgba(0,229,255,.2); }
+.stem-lab::before { content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,229,255,.25), transparent 70%); border-radius: 50%; animation: stemOrbit 20s linear infinite; }
+@keyframes stemOrbit { to { transform: rotate(360deg); } }
+.stem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; position: relative; z-index: 2; }
+.stem-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,201,60,.1); border: 1px solid rgba(255,201,60,.35); color: var(--gold); padding: 8px 18px; border-radius: 40px; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 18px; }
+.stem-lab h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); margin-bottom: 18px; }
+.stem-lab > .stem-grid > div > p { color: var(--muted); margin-bottom: 24px; }
+.stem-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 30px; }
+.stem-feature { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; }
+.stem-feature .check { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: var(--grad); display: grid; place-items: center; font-size: .7rem; color: #fff; font-weight: 800; }
+.stem-price-box { background: rgba(0,0,0,.35); border: 1px solid rgba(0,229,255,.25); border-radius: 22px; padding: 32px; backdrop-filter: blur(14px); text-align: center; position: relative; }
+.stem-price-box::before { content: 'SPECIAL OFFER'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--grad); padding: 5px 16px; border-radius: 40px; font-size: .7rem; font-weight: 800; letter-spacing: .1em; color: #fff; white-space: nowrap; }
+.stem-price-box .old-price { font-size: 1rem; color: var(--muted); text-decoration: line-through; }
+.stem-price-box .new-price { font-family: var(--display); font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin: 10px 0 4px; }
+.stem-price-box .price-label { font-size: .85rem; color: var(--muted); margin-bottom: 22px; }
+.stem-price-box .includes { font-size: .78rem; color: var(--muted); margin-top: 16px; line-height: 1.7; }
+.stem-price-box .includes b { color: var(--cyan); font-weight: 600; }
+
+/* BOOKS */
+.book-card { display: flex; flex-direction: column; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; transition: all .35s; }
+.book-card:hover { transform: translateY(-6px); border-color: rgba(168, 85, 247, .35); }
+.book-level { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); }
+.book-card h4 { font-size: 1.15rem; }
+.book-card .author { font-size: .82rem; color: var(--muted); }
+.book-price { font-family: var(--display); font-size: 1.5rem; font-weight: 700; color: var(--cyan); }
+.book-card .btn { margin-top: auto; }
+
+/* TESTIMONIALS */
+.testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 16px; transition: all .35s; }
+.testimonial-card:hover { transform: translateY(-6px); border-color: rgba(0,229,255,.3); }
+.stars { color: var(--gold); font-size: .95rem; letter-spacing: 2px; }
+.testimonial-card blockquote { font-size: .96rem; color: var(--muted); font-style: italic; line-height: 1.7; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+.avatar { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: .9rem; background: var(--grad); color: #fff; }
+.testimonial-author b { display: block; font-size: .92rem; }
+.testimonial-author span { font-size: .78rem; color: var(--muted); }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: start; }
+.contact-info { display: flex; flex-direction: column; gap: 22px; }
+.contact-item { display: flex; gap: 16px; align-items: flex-start; }
+.contact-item .icon-wrap { width: 46px; height: 46px; font-size: 1.2rem; border-radius: 14px; flex-shrink: 0; }
+.contact-item b { display: block; font-size: .95rem; margin-bottom: 2px; }
+.contact-item span { font-size: .88rem; color: var(--muted); }
+.contact-item a { color: var(--cyan); transition: color .25s; }
+.contact-item a:hover { color: var(--violet); }
+.form-card { background: var(--surface); border: 1px solid var(--border); border-radius: 26px; padding: 34px; backdrop-filter: blur(10px); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: .82rem; font-weight: 600; color: var(--muted); }
+.form-group input, .form-group select, .form-group textarea { padding: 13px 16px; border-radius: 13px; font-size: .93rem; background: rgba(255, 255, 255, .04); border: 1px solid var(--border); color: var(--txt); transition: all .25s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0, 229, 255, .12); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-note { font-size: .78rem; color: var(--muted); margin-top: 14px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: rgba(0, 0, 0, .25); }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand p { font-size: .88rem; color: var(--muted); margin-top: 16px; max-width: 300px; }
+.footer-col h5 { font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; color: var(--txt); }
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: .88rem; color: var(--muted); transition: color .25s; }
+.footer-col a:hover { color: var(--cyan); }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; font-size: .82rem; color: var(--muted); }
+.social-links { display: flex; gap: 12px; }
+.social-links a { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border); transition: all .3s; font-size: 1.1rem; }
+.social-links a:hover { transform: translateY(-4px) scale(1.05); }
+.social-links a.insta:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-color: transparent; color: #fff; }
+.social-links a.fb:hover { background: #1877f2; border-color: transparent; color: #fff; }
+.social-links a.li:hover { background: #0a66c2; border-color: transparent; color: #fff; }
+.social-links a.wa:hover { background: #25d366; border-color: transparent; color: #fff; }
+
+/* CHATBOT */
+.chat-fab { position: fixed; bottom: 24px; right: 24px; z-index: 1001; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; background: var(--grad); color: #fff; display: grid; place-items: center; font-size: 1.5rem; box-shadow: 0 10px 30px -8px rgba(0,229,255,.7); transition: all .3s cubic-bezier(.2,.8,.2,1); animation: fabPulse 2.5s ease-in-out infinite; }
+.chat-fab:hover { transform: scale(1.1) rotate(6deg); }
+.chat-fab .notif { position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; background: var(--pink); border-radius: 50%; font-size: .7rem; font-weight: 700; display: grid; place-items: center; color: #fff; border: 2px solid var(--bg); }
+@keyframes fabPulse { 0%, 100% { box-shadow: 0 10px 30px -8px rgba(0,229,255,.7), 0 0 0 0 rgba(0,229,255,.5); } 50% { box-shadow: 0 10px 30px -8px rgba(168,85,247,.7), 0 0 0 14px rgba(168,85,247,0); } }
+.chat-window { position: fixed; bottom: 96px; right: 24px; z-index: 1002; width: min(380px, calc(100vw - 40px)); height: min(560px, calc(100vh - 140px)); background: rgba(8, 10, 22, .96); backdrop-filter: blur(20px); border: 1px solid rgba(0,229,255,.3); border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 30px 80px -20px rgba(0,0,0,.9), 0 0 60px -20px rgba(0,229,255,.4); opacity: 0; transform: translateY(20px) scale(.95); pointer-events: none; transition: all .35s cubic-bezier(.2,.8,.2,1); }
+.chat-window.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.chat-head { padding: 16px 20px; background: linear-gradient(135deg, rgba(0,229,255,.15), rgba(168,85,247,.15)); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+.chat-head .bot-avatar { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--grad); color: #fff; font-size: 1.2rem; }
+.chat-head .bot-info b { font-size: .95rem; display: block; }
+.chat-head .bot-info span { font-size: .75rem; color: var(--green); display: flex; align-items: center; gap: 5px; }
+.chat-head .bot-info span::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: blink 2s infinite; }
+.chat-close { margin-left: auto; cursor: pointer; padding: 6px; border-radius: 8px; color: var(--muted); transition: .2s; }
+.chat-close:hover { background: rgba(255,255,255,.08); color: #fff; }
+.chat-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.chat-body::-webkit-scrollbar { width: 6px; }
+.chat-body::-webkit-scrollbar-thumb { background: rgba(0,229,255,.3); border-radius: 6px; }
+.msg { max-width: 82%; padding: 11px 16px; border-radius: 16px; font-size: .9rem; line-height: 1.5; animation: msgIn .35s cubic-bezier(.2,.8,.2,1) backwards; white-space: pre-line; }
+@keyframes msgIn { from { opacity: 0; transform: translateY(10px); } }
+.msg.bot { background: rgba(255,255,255,.06); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.user { background: var(--grad); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.msg.typing { display: flex; gap: 4px; align-items: center; padding: 14px 18px; }
+.msg.typing .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: typing 1.2s infinite; }
+.msg.typing .dot:nth-child(2) { animation-delay: .2s; }
+.msg.typing .dot:nth-child(3) { animation-delay: .4s; }
+@keyframes typing { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-4px); } }
+.chat-quick { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 20px 12px; }
+.chat-quick button { padding: 7px 14px; border-radius: 40px; font-size: .78rem; cursor: pointer; background: rgba(0,229,255,.08); border: 1px solid rgba(0,229,255,.25); color: var(--cyan); transition: all .25s; }
+.chat-quick button:hover { background: rgba(0,229,255,.18); transform: translateY(-2px); }
+.chat-foot { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; background: rgba(0,0,0,.3); }
+.chat-foot input { flex: 1; padding: 11px 16px; border-radius: 40px; font-size: .9rem; background: rgba(255,255,255,.06); border: 1px solid var(--border); color: var(--txt); }
+.chat-foot input:focus { border-color: var(--cyan); }
+.chat-foot button { width: 42px; height: 42px; border-radius: 50%; cursor: pointer; background: var(--grad); color: #fff; display: grid; place-items: center; transition: .25s; flex-shrink: 0; }
+.chat-foot button:hover { transform: scale(1.08); }
+
+/* LOGIN MODAL */
+.modal-backdrop { position: fixed; inset: 0; z-index: 2000; background: rgba(4, 5, 13, .88); backdrop-filter: blur(16px); display: grid; place-items: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.modal-backdrop.open { opacity: 1; pointer-events: auto; }
+.admin-login-modal { position: relative; width: min(440px, 100%); background: linear-gradient(160deg, rgba(20, 25, 50, .95), rgba(8, 10, 22, .95)); border: 1px solid rgba(0, 229, 255, .3); border-radius: 28px; padding: 48px 38px 38px; text-align: center; box-shadow: 0 30px 90px -20px rgba(0,0,0,.95), 0 0 90px -30px rgba(0,229,255,.55); transform: translateY(20px) scale(.95); transition: transform .35s cubic-bezier(.2,.8,.2,1); overflow: hidden; }
+.admin-login-modal::before { content: ''; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,229,255,.18), transparent 65%); border-radius: 50%; pointer-events: none; }
+.admin-login-modal::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(168,85,247,.15), transparent 65%); border-radius: 50%; pointer-events: none; }
+.modal-backdrop.open .admin-login-modal { transform: translateY(0) scale(1); }
+.admin-login-modal .modal-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: grid; place-items: center; color: var(--muted); transition: .25s; z-index: 3; }
+.admin-login-modal .modal-close:hover { background: rgba(255,77,109,.15); color: var(--red); transform: rotate(90deg); }
+.login-icon { position: relative; width: 76px; height: 76px; margin: 0 auto 22px; border-radius: 22px; display: grid; place-items: center; font-size: 2rem; color: #fff; background: var(--grad); box-shadow: 0 12px 40px -8px rgba(0,229,255,.7); animation: loginPulse 2.5s ease-in-out infinite; z-index: 2; }
+@keyframes loginPulse { 0%, 100% { box-shadow: 0 12px 40px -8px rgba(0,229,255,.7), 0 0 0 0 rgba(0,229,255,.5); } 50% { box-shadow: 0 12px 40px -8px rgba(168,85,247,.7), 0 0 0 16px rgba(168,85,247,0); } }
+.admin-login-modal h3 { position: relative; font-size: 1.6rem; margin-bottom: 8px; z-index: 2; }
+.admin-login-modal > p { position: relative; color: var(--muted); font-size: .95rem; margin-bottom: 28px; z-index: 2; }
+.login-field { position: relative; margin-bottom: 16px; z-index: 2; }
+.login-field .field-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; color: var(--muted); pointer-events: none; transition: color .25s; z-index: 1; }
+.login-field input { width: 100%; padding: 15px 16px 15px 48px; border-radius: 14px; font-size: .95rem; background: rgba(255, 255, 255, .04); border: 1px solid var(--border); color: var(--txt); transition: all .25s; }
+.login-field input:focus { border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(0, 229, 255, .14); background: rgba(0, 229, 255, .04); }
+.login-field input:focus + .field-icon,
+.login-field input:not(:placeholder-shown) + .field-icon { color: var(--cyan); }
+.login-field .toggle-pwd { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; display: grid; place-items: center; cursor: pointer; color: var(--muted); border-radius: 8px; transition: .25s; z-index: 3; }
+.login-field .toggle-pwd:hover { color: var(--cyan); background: rgba(0,229,255,.08); }
+.login-options { display: flex; justify-content: space-between; align-items: center; margin: 8px 2px 22px; font-size: .85rem; color: var(--muted); z-index: 2; position: relative; }
+.login-options label { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+.login-options input[type="checkbox"] { appearance: none; width: 18px; height: 18px; border-radius: 5px; background: rgba(255,255,255,.06); border: 1px solid var(--border); cursor: pointer; position: relative; transition: all .2s; }
+.login-options input[type="checkbox"]:checked { background: var(--grad); border-color: transparent; }
+.login-options input[type="checkbox"]:checked::after { content: '✓'; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: .75rem; font-weight: 800; }
+.login-options a { color: var(--cyan); font-size: .82rem; }
+.login-options a:hover { text-decoration: underline; }
+.login-attempts { position: relative; z-index: 2; font-size: .78rem; color: var(--red); margin-top: 14px; min-height: 1.2em; }
+.login-secure { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: .75rem; color: var(--muted); margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.06); }
+.login-secure .icon { color: var(--green); font-size: .9rem; }
+
+/* ADMIN DASHBOARD */
+.admin-dashboard { position: fixed; inset: 0; z-index: 2000; background: rgba(4, 5, 13, .97); backdrop-filter: blur(20px); opacity: 0; pointer-events: none; transition: opacity .35s; display: flex; flex-direction: column; overflow: hidden; }
+.admin-dashboard.open { opacity: 1; pointer-events: auto; }
+.admin-dash-inner { width: 100%; height: 100%; padding: 24px; display: flex; flex-direction: column; gap: 20px; overflow: hidden; max-width: 1400px; margin: 0 auto; }
+.admin-dash-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.admin-dash-title { display: flex; align-items: center; gap: 14px; }
+.admin-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 1.4rem; color: #fff; background: var(--grad); box-shadow: 0 8px 25px -8px rgba(0, 229, 255, .6); }
+.admin-dash-title h2 { font-size: 1.4rem; margin: 0; }
+.admin-live { font-size: .78rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.admin-live i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); animation: blink 2s infinite; }
+.admin-dash-actions { display: flex; gap: 10px; align-items: center; }
+.admin-dash-close { width: 42px; height: 42px; border-radius: 12px; cursor: pointer; display: grid; place-items: center; color: var(--muted); background: rgba(255,255,255,.05); border: 1px solid var(--border); transition: .25s; }
+.admin-dash-close:hover { background: rgba(255,77,109,.15); border-color: var(--red); color: var(--red); transform: rotate(90deg); }
+.admin-stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.admin-stat { display: flex; align-items: center; gap: 14px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; transition: all .3s; }
+.admin-stat:hover { transform: translateY(-3px); border-color: rgba(0, 229, 255, .3); box-shadow: 0 12px 30px -12px rgba(0,229,255,.35); }
+.admin-stat-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 1.2rem; flex-shrink: 0; }
+.si-1 { background: rgba(0,229,255,.12); color: var(--cyan); border: 1px solid rgba(0,229,255,.3); }
+.si-2 { background: rgba(255,46,147,.12); color: var(--pink); border: 1px solid rgba(255,46,147,.3); }
+.si-3 { background: rgba(34,230,166,.12); color: var(--green); border: 1px solid rgba(34,230,166,.3); }
+.si-4 { background: rgba(255,201,60,.12); color: var(--gold); border: 1px solid rgba(255,201,60,.3); }
+.admin-stat b { display: block; font-family: var(--display); font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.admin-stat span { font-size: .8rem; color: var(--muted); }
+.admin-toolbar { display: flex; gap: 12px; flex-wrap: wrap; }
+.admin-search { flex: 1; min-width: 240px; display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 40px; background: var(--surface); border: 1px solid var(--border); transition: .25s; }
+.admin-search:focus-within { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0, 229, 255, .12); }
+.admin-search .icon { color: var(--muted); font-size: 1.05rem; }
+.admin-search input { flex: 1; background: none; border: none; font-size: .92rem; color: var(--txt); }
+.admin-filter { padding: 12px 18px; border-radius: 40px; font-size: .9rem; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--txt); transition: .25s; }
+.admin-filter:focus { border-color: var(--cyan); }
+.admin-filter option { background: #0a0c18; color: var(--txt); }
+.admin-table-wrap { flex: 1; overflow: auto; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); position: relative; }
+.admin-table-wrap::-webkit-scrollbar { width: 8px; height: 8px; }
+.admin-table-wrap::-webkit-scrollbar-thumb { background: rgba(0,229,255,.3); border-radius: 8px; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.admin-table thead { position: sticky; top: 0; z-index: 2; background: rgba(10, 12, 24, .98); backdrop-filter: blur(10px); }
+.admin-table thead th { padding: 14px 16px; text-align: left; font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-bottom: 1px solid var(--border); white-space: nowrap; }
+.admin-table tbody tr { border-bottom: 1px solid rgba(255,255,255,.04); transition: background .25s; animation: rowIn .35s backwards; }
+@keyframes rowIn { from { opacity: 0; transform: translateY(8px); } }
+.admin-table tbody tr:hover { background: rgba(0, 229, 255, .04); }
+.admin-table tbody td { padding: 14px 16px; color: var(--txt); vertical-align: top; }
+.admin-table td.col-msg { max-width: 220px; color: var(--muted); font-size: .85rem; }
+.admin-table td.col-date { color: var(--muted); font-size: .82rem; white-space: nowrap; }
+.admin-table td.col-idx { color: var(--muted); font-weight: 600; }
+.admin-table td.col-name b { display: block; font-weight: 600; }
+.admin-table td.col-contact a { color: var(--cyan); display: block; font-size: .85rem; }
+.admin-table td.col-contact a:hover { color: var(--violet); }
+.status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 30px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.status-new { background: rgba(255,46,147,.15); color: var(--pink); border: 1px solid rgba(255,46,147,.35); }
+.status-contacted { background: rgba(34,230,166,.15); color: var(--green); border: 1px solid rgba(34,230,166,.35); }
+.status-closed { background: rgba(139,147,171,.15); color: var(--muted); border: 1px solid rgba(139,147,171,.35); }
+.row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.row-action { width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: grid; place-items: center; font-size: .9rem; background: rgba(255,255,255,.05); border: 1px solid var(--border); color: var(--muted); transition: .25s; }
+.row-action:hover { transform: translateY(-2px); }
+.row-action.act-contact:hover { background: rgba(34,230,166,.15); border-color: var(--green); color: var(--green); }
+.row-action.act-close:hover { background: rgba(139,147,171,.15); border-color: var(--muted); color: var(--txt); }
+.row-action.act-del:hover { background: rgba(255,77,109,.15); border-color: var(--red); color: var(--red); }
+.admin-empty { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--muted); padding: 40px; }
+.admin-empty.show { display: flex; }
+.admin-empty .icon { font-size: 3rem; color: var(--cyan); opacity: .4; margin-bottom: 18px; }
+.admin-empty h4 { color: var(--txt); font-size: 1.15rem; margin-bottom: 6px; }
+.admin-empty p { font-size: .9rem; max-width: 320px; }
+
+/* TOASTS */
+.toast-wrap { position: fixed; top: 90px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+.toast { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 14px; min-width: 260px; max-width: 380px; background: rgba(10, 12, 24, .98); border: 1px solid var(--border); box-shadow: 0 20px 50px -12px rgba(0,0,0,.9); pointer-events: auto; animation: toastIn .4s cubic-bezier(.2,.8,.2,1) backwards; font-size: .9rem; color: var(--txt); }
+.toast.removing { animation: toastOut .3s forwards; }
+@keyframes toastIn { from { opacity: 0; transform: translateX(60px); } }
+@keyframes toastOut { to { opacity: 0; transform: translateX(60px); } }
+.toast .t-icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-size: 1rem; flex-shrink: 0; }
+.toast.success { border-color: rgba(34,230,166,.5); }
+.toast.success .t-icon { background: rgba(34,230,166,.15); color: var(--green); }
+.toast.error { border-color: rgba(255,77,109,.5); }
+.toast.error .t-icon { background: rgba(255,77,109,.15); color: var(--red); }
+.toast.info .t-icon { background: rgba(0,229,255,.15); color: var(--cyan); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+    .hero-copy .lead { margin-left: auto; margin-right: auto; }
+    .hero-btns { justify-content: center; }
+    .hero-trust { justify-content: center; }
+    .hero-visual { height: 360px; order: -1; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .stem-grid { grid-template-columns: 1fr; gap: 40px; }
+    .stem-lab { padding: 40px 30px; }
+    .admin-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .nav-cta { display: none; }
+}
+@media (max-width: 820px) {
+    .menu { position: fixed; top: 0; right: -100%; width: min(320px, 85vw); height: 100vh; flex-direction: column; align-items: stretch; gap: 6px; padding: 90px 24px 30px; background: rgba(6, 7, 15, .98); backdrop-filter: blur(24px); border-left: 1px solid var(--border); transition: right .4s cubic-bezier(.2,.8,.2,1); z-index: 999; }
+    .menu.open { right: 0; }
+    .menu a { padding: 14px 18px; font-size: 1rem; }
+    .burger { display: flex; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); padding: 28px 20px; gap: 24px 14px; }
+    .stat:nth-child(3)::before { display: none; }
+    .float-badge { display: none; }
+    section { padding: 70px 0; }
+    .stem-features { grid-template-columns: 1fr; }
+    .admin-dash-header { flex-direction: column; align-items: flex-start; }
+    .admin-dash-actions { width: 100%; justify-content: space-between; }
+    .admin-table thead th:nth-child(5), .admin-table tbody td.col-msg { display: none; }
+}
+@media (max-width: 600px) {
+    .hero { padding: 140px 0 60px; }
+    .hero-visual { height: 300px; }
+    .hero-card { padding: 22px 18px; }
+    .hero-trust { gap: 24px; }
+    .hero-trust b { font-size: 1.3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-card { padding: 24px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .stats-strip { padding: 24px 18px; gap: 14px; }
+    .stem-lab { padding: 30px 20px; border-radius: 24px; }
+    .stem-price-box { padding: 26px 20px; }
+    .chat-fab { bottom: 16px; right: 16px; width: 54px; height: 54px; font-size: 1.3rem; }
+    .chat-window { bottom: 82px; right: 16px; left: 16px; width: auto; }
+    .admin-dash-inner { padding: 14px; }
+    .admin-stats-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .admin-stat { padding: 12px 14px; }
+    .admin-stat b { font-size: 1.2rem; }
+    .admin-table thead th:nth-child(2), .admin-table tbody td.col-name, .admin-table thead th:nth-child(4), .admin-table tbody td.col-prog { display: none; }
+    .admin-login-modal { padding: 38px 24px 30px; }
+    .admin-dash-title h2 { font-size: 1.15rem; }
+    .toast-wrap { top: 78px; right: 12px; left: 12px; }
+    .toast { min-width: auto; max-width: none; }
+    .included-section { padding: 60px 0; }
+    .included-grid { grid-template-columns: 1fr; gap: 16px; }
+    .included-card { padding: 28px 22px 24px; }
+    .included-icon { width: 52px; height: 52px; font-size: 1.4rem; margin-bottom: 18px; }
+    .included-num { font-size: 2rem; top: 18px; right: 20px; }
+}
+@media (max-width: 400px) {
+    .hero-btns .btn { width: 100%; }
+    .btn { padding: 13px 24px; font-size: .92rem; }
+    .kit-price-row { flex-direction: column; align-items: stretch; }
+    .kit-price-row .btn { width: 100%; }
+    .admin-stats-row { grid-template-columns: 1fr; }
+    .stat + .stat::before { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG SPRITE -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"></rect><circle cx="9" cy="13" r="1"></circle><circle cx="15" cy="13" r="1"></circle><path d="M12 7V3M9 3h6M1 13v3M23 13v3"></path></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h13a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"></path><path d="M4 17a3 3 0 0 1 3-3h13"></path></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"></path></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></symbol>
+    <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></symbol>
+    <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2z"></path></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"></path></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"></path><rect x="7" y="12" width="3" height="6"></rect><rect x="12" y="8" width="3" height="10"></rect><rect x="17" y="4" width="3" height="14"></rect></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6M6 8h12v3a6 6 0 0 1-12 0V8zM12 17v5"></path></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"></rect><path d="M22 8l-6 4 6 4V8z"></path></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="15" x2="15" y2="15"></line><line x1="9" y1="11" x2="15" y2="11"></line></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"></path></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 6l10 7 10-7"></path></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></symbol>
+    <symbol id="i-school" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 2v6l-5 10a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L15 8V2"></path><path d="M7 2h10"></path><line x1="7" y1="14" x2="17" y2="14"></line></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></symbol>
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6L12 3z"></path><path d="M19 15l.9 2.7L22.5 18.5l-2.6.8L19 22l-.9-2.7L15.5 18.5l2.6-.8L19 15z"></path></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></symbol>
+</svg>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="bg-fx">
+    <div class="grid"></div>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="floating-icons">
+        <svg class="fi fi1"><use href="#i-robot"></use></svg>
+        <svg class="fi fi2"><use href="#i-chip"></use></svg>
+        <svg class="fi fi3"><use href="#i-brain"></use></svg>
+        <svg class="fi fi4"><use href="#i-cube"></use></svg>
+        <svg class="fi fi5"><use href="#i-bolt"></use></svg>
+        <svg class="fi fi6"><use href="#i-code"></use></svg>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="nav" id="nav">
+    <div class="container nav-inner">
+        <a href="#home" class="logo">
+            <span class="logo-mark">AE</span>
+            <span class="logo-txt">Aethel<em>botics</em></span>
+        </a>
+        <nav class="menu" id="menu">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#programs">Programs</a>
+            <a href="#kits">Kits</a>
+            <a href="#stemlab">STEM Lab</a>
+            <a href="#included">Included</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Enquiry</a>
+        </nav>
+        <div class="nav-actions">
+            <button class="admin-btn" id="adminBtn" aria-label="Admin Panel">
+                <svg class="icon"><use href="#i-lock"></use></svg>
+                <span class="admin-badge hidden" id="adminBadge">0</span>
+            </button>
+            <a href="#contact" class="btn btn-grad btn-sm nav-cta">Book Free Demo</a>
+            <button class="burger" id="burger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+<div class="menu-backdrop" id="menuBackdrop"></div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <canvas id="heroCanvas"></canvas>
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <span class="eyebrow reveal">Robotics • STEAM • Innovation</span>
+            <h1 class="reveal d1">Build the Future with <span class="grad-txt shimmer">Robotics &amp; STEAM</span> Learning</h1>
+            <p class="lead reveal d2">
+                Hands-on training for <b>Class 1–12</b>, <b>BTech</b>, <b>BCA</b> &amp; <b>MCA</b> students —
+                with complete Final Year Projects, Kits &amp; <b>STEM Lab setup in schools at just ₹2 Lakhs</b>.
+            </p>
+            <div class="typed-line reveal d3" id="typed">Robotics for Class 1–12<span class="cur"></span></div>
+            <div class="hero-btns reveal d4">
+                <a href="#contact" class="btn btn-grad btn-magnetic"><svg class="icon"><use href="#i-rocket"></use></svg> Start Your Journey</a>
+                <a href="#kits" class="btn btn-ghost btn-magnetic"><svg class="icon"><use href="#i-cube"></use></svg> Explore Kits</a>
+            </div>
+            <div class="hero-trust reveal d5">
+                <div><b data-count="8500">8,500</b><span>Students Trained</span></div>
+                <div><b data-count="420">420</b><span>Projects Delivered</span></div>
+                <div><b data-count="98">98</b><span>% Satisfaction</span></div>
+            </div>
+        </div>
+        <div class="hero-visual reveal d2">
+            <div class="ring r1"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+            <div class="float-badge f1"><svg class="icon"><use href="#i-robot"></use></svg>Robotics Lab</div>
+            <div class="float-badge f2"><svg class="icon"><use href="#i-video"></use></svg>Live Project Help</div>
+            <div class="float-badge f3"><svg class="icon"><use href="#i-cube"></use></svg>STEM Kits</div>
+            <div class="hero-card tilt-card">
+                <div class="chip"><svg class="icon"><use href="#i-brain"></use></svg></div>
+                <h4>STEAM Mastery Track</h4>
+                <p>Science • Tech • Engineering • Arts • Math</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">Why Aethelbotics</span>
+            <h2 class="section-title reveal d1">Learning That Actually <span class="grad-txt shimmer">Builds Things</span></h2>
+            <p class="section-sub reveal d2">We don't just teach theory. Every student builds real hardware, writes real code and presents real projects — guided by mentors from top engineering backgrounds.</p>
+        </div>
+        <div class="grid-3">
+            <div class="card reveal tilt-card">
+                <div class="icon-wrap"><svg class="icon"><use href="#i-cog"></use></svg></div>
+                <h3>Hands-On STEAM Labs</h3>
+                <p>Live virtual + offline lab sessions where students assemble circuits, sensors, motors and microcontroller boards themselves.</p>
+            </div>
+            <div class="card reveal d1 tilt-card">
+                <div class="icon-wrap"><svg class="icon"><use href="#i-robot"></use></svg></div>
+                <h3>1-on-1 Mentor Support</h3>
+                <p>Dedicated doubt sessions, progress tracking and personal mentorship for every enrolled student — school to college level.</p>
+            </div>
+            <div class="card reveal d2 tilt-card">
+                <div class="icon-wrap"><svg class="icon"><use href="#i-file"></use></svg></div>
+                <h3>Final Year Project Suite</h3>
+                <p>Complete code, circuit diagrams, connection guides, documentation, PPT and live explanation for viva preparation.</p>
+            </div>
+            <div class="card reveal tilt-card">
+                <div class="icon-wrap"><svg class="icon"><use href="#i-book"></use></svg></div>
+                <h3>STEAM Learning Books</h3>
+                <p>Our own illustrated workbooks &amp; activity guides designed for the Indian curriculum — from Class 1 basics to advanced robotics.</p>
+            </div>
+            <div class="card reveal d1 tilt-card">
+                <div class="icon-wrap"><svg class="icon"><use href="#i-trophy"></use></svg></div>
+                <h3>Competition Prep</h3>
+                <p>Training for robotics olympiads, science fairs, hackathons and national-level innovation challenges.</p>
+            </div>
+            <div class="card reveal d2 tilt-card">
+                <div class="icon-wrap"><svg class="icon"><use href="#i-briefcase"></use></svg></div>
+                <h3>Placement &amp; Internship</h3>
+                <p>Resume building, mock interviews and internship referrals for BTech / BCA / MCA students in core tech domains.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section style="padding-top:0">
+    <div class="container">
+        <div class="stats-strip reveal">
+            <div class="stat"><b data-count="8500">8,500</b><span>Students Trained</span></div>
+            <div class="stat"><b data-count="420">420</b><span>Projects Delivered</span></div>
+            <div class="stat"><b data-count="120">120</b><span>Partner Schools</span></div>
+            <div class="stat"><b data-count="35">35</b><span>Expert Mentors</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- INCLUDED -->
+<section id="included" class="included-section">
+    <div class="container">
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">Project Deliverables</span>
+            <h2 class="section-title reveal d1">Har Project Me <span class="grad-txt shimmer">Kya Milta Hai?</span></h2>
+            <p class="section-sub reveal d2">Everything you need to submit, demo and defend your project confidently.</p>
+        </div>
+        <div class="included-grid">
+            <div class="included-card reveal tilt-card">
+                <div class="included-icon ii-1"><svg class="icon"><use href="#i-code"></use></svg></div>
+                <span class="included-num">01</span>
+                <h3>Complete Source Code</h3>
+                <p>Clean, commented code with setup instructions.</p>
+                <div class="included-glow"></div>
+            </div>
+            <div class="included-card reveal d1 tilt-card">
+                <div class="included-icon ii-2"><svg class="icon"><use href="#i-chip"></use></svg></div>
+                <span class="included-num">02</span>
+                <h3>Connections &amp; Wiring</h3>
+                <p>Circuit diagrams and pin-to-pin connection guide.</p>
+                <div class="included-glow"></div>
+            </div>
+            <div class="included-card reveal d2 tilt-card">
+                <div class="included-icon ii-3"><svg class="icon"><use href="#i-video"></use></svg></div>
+                <span class="included-num">03</span>
+                <h3>Live Explanation</h3>
+                <p>1-on-1 session explaining every module &amp; line.</p>
+                <div class="included-glow"></div>
+            </div>
+            <div class="included-card reveal d3 tilt-card">
+                <div class="included-icon ii-4"><svg class="icon"><use href="#i-file"></use></svg></div>
+                <span class="included-num">04</span>
+                <h3>Report + PPT</h3>
+                <p>Ready-to-submit documentation and presentation.</p>
+                <div class="included-glow"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+    <div class="container">
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">Our Programs</span>
+            <h2 class="section-title reveal d1">Courses for <span class="grad-txt shimmer">Every Level</span></h2>
+            <p class="section-sub reveal d2">Structured learning paths designed for school students and college students — each with practical kits, projects and certification.</p>
+        </div>
+        <div class="grid-3">
+            <div class="card program-card reveal tilt-card">
+                <span class="tag">Class 1–5</span>
+                <h3>Junior Robotics &amp; STEAM</h3>
+                <p>Playful introduction to science, simple machines, block coding and creative building.</p>
+                <ul><li>LEGO-style mechanical builds</li><li>Scratch Jr. block coding</li><li>Paper circuits &amp; magnets</li><li>Art + Science fusion activities</li></ul>
+            </div>
+            <div class="card program-card reveal d1 tilt-card">
+                <span class="tag">Class 6–8</span>
+                <h3>Robotics Foundation</h3>
+                <p>Move from blocks to real circuits — sensors, motors and beginner microcontroller programming.</p>
+                <ul><li>Arduino Uno basics</li><li>Scratch + Arduino combo</li><li>Sensor &amp; motor interfacing</li><li>Mini robot car project</li></ul>
+            </div>
+            <div class="card program-card reveal d2 tilt-card">
+                <span class="tag">Class 9–12</span>
+                <h3>Advanced Robotics &amp; IoT</h3>
+                <p>Engineering-level projects with Python, IoT dashboards and AI fundamentals.</p>
+                <ul><li>Python programming</li><li>IoT with ESP32 / NodeMCU</li><li>AI &amp; Computer Vision intro</li><li>Science fair project support</li></ul>
+            </div>
+            <div class="card program-card reveal tilt-card">
+                <span class="tag">B.Tech</span>
+                <h3>BTech Final Year Projects</h3>
+                <p>Industry-grade major projects across Embedded, IoT, AI/ML and Robotics domains.</p>
+                <ul><li>Complete source code</li><li>Circuit diagram &amp; connections</li><li>Live 1-on-1 explanation</li><li>Report, PPT &amp; viva prep</li></ul>
+            </div>
+            <div class="card program-card reveal d1 tilt-card">
+                <span class="tag">BCA</span>
+                <h3>BCA Project Program</h3>
+                <p>Software-focused projects in web, mobile and database technologies with full documentation.</p>
+                <ul><li>Web / App development projects</li><li>Database design &amp; ER diagrams</li><li>Source code + setup guide</li><li>Live walkthrough session</li></ul>
+            </div>
+            <div class="card program-card reveal d2 tilt-card">
+                <span class="tag">MCA</span>
+                <h3>MCA Advanced Projects</h3>
+                <p>AI/ML, full-stack and data-driven final year projects with research-grade documentation.</p>
+                <ul><li>AI / ML model projects</li><li>Full-stack web applications</li><li>Research paper guidance</li><li>Deployment &amp; demo support</li></ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- KITS -->
+<section id="kits">
+    <div class="container">
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">Learning Kits</span>
+            <h2 class="section-title reveal d1">Kits That Come With <span class="grad-txt shimmer">Everything You Need</span></h2>
+            <p class="section-sub reveal d2">Each kit includes hardware components, illustrated manuals, video tutorials and lifetime mentor support.</p>
+        </div>
+        <div class="grid-3">
+            <div class="kit-card reveal tilt-card">
+                <div class="kit-visual"><span class="kit-emoji">💻</span></div>
+                <h3>Programming Kit</h3>
+                <p>Perfect for beginners who want to learn coding from scratch — block-based to Python and Arduino IDE.</p>
+                <ul><li>Arduino Uno R3 + USB cable</li><li>Breadboard + jumper wires + LEDs</li><li>Resistors, buttons &amp; buzzers</li><li>Illustrated coding workbook</li><li>Video tutorials + mentor support</li></ul>
+                <div class="kit-price-row">
+                    <div class="kit-price">₹<span>1,499</span><small>₹2,499</small></div>
+                    <a href="#contact" class="btn btn-grad btn-sm">Order Now</a>
+                </div>
+            </div>
+            <div class="kit-card reveal d1 tilt-card">
+                <div class="kit-visual"><span class="kit-emoji">⚡</span></div>
+                <h3>Electronics Kit</h3>
+                <p>Learn the fundamentals of electronics — circuits, sensors, motors and real-world prototyping.</p>
+                <ul><li>Breadboard, wires &amp; multimeter</li><li>LEDs, capacitors, transistors &amp; diodes</li><li>DC motor + servo + driver module</li><li>Assorted sensors (IR, LDR, temp)</li><li>Circuit diagram handbook</li></ul>
+                <div class="kit-price-row">
+                    <div class="kit-price">₹<span>1,999</span><small>₹3,199</small></div>
+                    <a href="#contact" class="btn btn-grad btn-sm">Order Now</a>
+                </div>
+            </div>
+            <div class="kit-card reveal d2 tilt-card">
+                <div class="kit-visual"><span class="kit-emoji">📡</span></div>
+                <h3>IoT Kit</h3>
+                <p>Build smart connected devices — monitor data from anywhere and control hardware via the cloud.</p>
+                <ul><li>ESP32 / NodeMCU board</li><li>DHT11, ultrasonic, gas &amp; PIR sensors</li><li>Relay module + OLED display</li><li>Cloud dashboard setup guide</li><li>Mobile app control tutorial</li></ul>
+                <div class="kit-price-row">
+                    <div class="kit-price">₹<span>2,999</span><small>₹4,499</small></div>
+                    <a href="#contact" class="btn btn-grad btn-sm">Order Now</a>
+                </div>
+            </div>
+        </div>
+        <p class="center" style="margin-top:36px; color:var(--muted); font-size:.9rem;">
+            📦 Free shipping across India · 🎓 Certificate on completion · 📞 Lifetime mentor support
+        </p>
+    </div>
+</section>
+
+<!-- STEM LAB -->
+<section id="stemlab">
+    <div class="container">
+        <div class="stem-lab reveal">
+            <div class="stem-grid">
+                <div>
+                    <span class="stem-badge"><svg class="icon"><use href="#i-school"></use></svg> For Schools &amp; Institutes</span>
+                    <h2>We Provide <span class="grad-txt shimmer">STEM Labs</span> in Schools</h2>
+                    <p>Give your students a world-class STEM learning environment. We set up a complete, ready-to-use Robotics, IoT &amp; AI lab at your school — with hardware, curriculum, teacher training and continuous support.</p>
+                    <div class="stem-features">
+                        <div class="stem-feature"><span class="check">✓</span><span>Complete Hardware Setup</span></div>
+                        <div class="stem-feature"><span class="check">✓</span><span>Robotics + IoT + AI Kits</span></div>
+                        <div class="stem-feature"><span class="check">✓</span><span>Class-wise Curriculum</span></div>
+                        <div class="stem-feature"><span class="check">✓</span><span>Teacher Training Program</span></div>
+                        <div class="stem-feature"><span class="check">✓</span><span>Yearly Maintenance &amp; Support</span></div>
+                        <div class="stem-feature"><span class="check">✓</span><span>Student Project Guidance</span></div>
+                    </div>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <a href="#contact" class="btn btn-grad"><svg class="icon"><use href="#i-flask"></use></svg> Request a Free Demo</a>
+                        <a href="#contact" class="btn btn-ghost">Download Brochure</a>
+                    </div>
+                </div>
+                <div class="stem-price-box">
+                    <div class="old-price">₹3,50,000</div>
+                    <div class="new-price">₹2,00,000</div>
+                    <div class="price-label">One-Time Setup Cost</div>
+                    <a href="#contact" class="btn btn-grad btn-block"><svg class="icon"><use href="#i-bolt"></use></svg> Book STEM Lab</a>
+                    <p class="includes"><b>Includes:</b> Hardware + Kits + Software + Curriculum + Teacher Training + 1-Year Support</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:linear-gradient(180deg,transparent,rgba(168,85,247,.05),transparent)">
+    <div class="container">
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">Final Year Projects</span>
+            <h2 class="section-title reveal d1">Projects That <span class="grad-txt shimmer">Actually Work</span></h2>
+            <p class="section-sub reveal d2">Every project comes with full source code, wiring/connection diagrams, component list, documentation and a live explanation session.</p>
+        </div>
+        <div class="grid-4">
+            <div class="card project-card reveal tilt-card"><div class="project-icon"><svg class="icon"><use href="#i-chip"></use></svg></div><h4>Smart Agriculture Monitoring</h4><p>Soil moisture, temperature &amp; humidity monitoring with auto-irrigation and a live IoT dashboard.</p></div>
+            <div class="card project-card reveal d1 tilt-card"><div class="project-icon"><svg class="icon"><use href="#i-robot"></use></svg></div><h4>Obstacle Avoiding Robot</h4><p>Autonomous robot using ultrasonic sensors with motor driver control and smart path detection.</p></div>
+            <div class="card project-card reveal d2 tilt-card"><div class="project-icon"><svg class="icon"><use href="#i-brain"></use></svg></div><h4>Face Recognition Attendance</h4><p>Python + OpenCV based attendance system with database logging and CSV export.</p></div>
+            <div class="card project-card reveal d3 tilt-card"><div class="project-icon"><svg class="icon"><use href="#i-plug"></use></svg></div><h4>RFID Smart Door Lock</h4><p>Secure access system with RFID cards, buzzer alerts and LCD status display.</p></div>
+            <div class="card project-card reveal tilt-card"><div class="project-icon"><svg class="icon"><use href="#i-video"></use></svg></div><h4>Traffic Sign Detection</h4><p>CNN-based deep learning model that detects and classifies road signs in real time.</p></div>
+            <div class="card project-card reveal d1 tilt-card"><div class="project-icon"><svg class="icon"><use href="#i-chart"></use></svg></div><h4>Health Monitoring Band</h4><p>Wearable IoT device tracking heart rate, SpO₂ and steps with cloud sync.</p></div>
+            <div class="card project-card reveal d2 tilt-card"><div class="project-icon"><svg class="icon"><use href="#i-cog"></use></svg></div><h4>Robotic Arm with App Control</h4><p>4-DOF servo robotic arm controlled via Bluetooth mobile application.</p></div>
+            <div class="card project-card reveal d3 tilt-card"><div class="project-icon"><svg class="icon"><use href="#i-save"></use></svg></div><h4>Student Management System</h4><p>Role-based dashboard with attendance, marks, fees and report generation.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- BOOKS -->
+<section id="books">
+    <div class="container">
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">STEAM Books</span>
+            <h2 class="section-title reveal d1">Our Own <span class="grad-txt shimmer">Learning Series</span></h2>
+            <p class="section-sub reveal d2">Illustrated, activity-based books designed by engineers &amp; educators — perfect for self-learning and school curriculum support.</p>
+        </div>
+        <div class="grid-4">
+            <div class="book-card reveal tilt-card"><span class="book-level">Level 1 · Class 1–5</span><h4>STEAM Explorers: Science in Action</h4><p class="author">Aethelbotics Press</p><div class="book-price">₹399</div><a href="#contact" class="btn btn-grad btn-block">Order Now</a></div>
+            <div class="book-card reveal d1 tilt-card"><span class="book-level">Level 2 · Class 6–8</span><h4>Robotics Basics with Arduino</h4><p class="author">Aethelbotics Press</p><div class="book-price">₹549</div><a href="#contact" class="btn btn-grad btn-block">Order Now</a></div>
+            <div class="book-card reveal d2 tilt-card"><span class="book-level">Level 3 · Class 9–12</span><h4>IoT &amp; AI for Young Innovators</h4><p class="author">Aethelbotics Press</p><div class="book-price">₹699</div><a href="#contact" class="btn btn-grad btn-block">Order Now</a></div>
+            <div class="book-card reveal d3 tilt-card"><span class="book-level">Level 4 · BTech/BCA/MCA</span><h4>Final Year Project Handbook</h4><p class="author">Aethelbotics Press</p><div class="book-price">₹899</div><a href="#contact" class="btn btn-grad btn-block">Order Now</a></div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:linear-gradient(180deg,transparent,rgba(0,229,255,.045),transparent)">
+    <div class="container">
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">Student Stories</span>
+            <h2 class="section-title reveal d1">What Our <span class="grad-txt shimmer">Students Say</span></h2>
+        </div>
+        <div class="grid-3">
+            <div class="testimonial-card reveal tilt-card">
+                <div class="stars">★★★★★</div>
+                <blockquote>"Mera final year project bilkul ready tha — code, connections, report sab kuch. Live explanation session ne viva me bahut help kiya."</blockquote>
+                <div class="testimonial-author"><div class="avatar">AR</div><div><b>Aditya Raj</b><span>B.Tech ECE, Final Year</span></div></div>
+            </div>
+            <div class="testimonial-card reveal d1 tilt-card">
+                <div class="stars">★★★★★</div>
+                <blockquote>"Mere bete ne Class 7 se robotics start kiya. Ab wo khud Arduino se projects banata hai. Teachers bahut supportive hain."</blockquote>
+                <div class="testimonial-author"><div class="avatar">SM</div><div><b>Sunita Mehta</b><span>Parent, Class 7 Student</span></div></div>
+            </div>
+            <div class="testimonial-card reveal d2 tilt-card">
+                <div class="stars">★★★★★</div>
+                <blockquote>"MCA me AI/ML project chahiye tha. Yahan se pura source code, dataset aur documentation mila. Deployment tak support kiya."</blockquote>
+                <div class="testimonial-author"><div class="avatar">PK</div><div><b>Priya Kulkarni</b><span>MCA, Pune</span></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CONTACT FORM — NATIVE FORMSPREE SUBMISSION
+     ⚠️ action="..." me apni Formspree URL paste karo
+     Format: https://formspree.io/f/YOUR_FORM_ID
+     Example: https://formspree.io/f/xbjkyqwe
+     ============================================================ -->
+<section id="contact">
+    <div class="container">
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">Get In Touch</span>
+            <h2 class="section-title reveal d1">Book Your <span class="grad-txt shimmer">Free Demo Class</span></h2>
+            <p class="section-sub reveal d2">Fill the form below and our counsellor will contact you within 24 hours.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info reveal">
+                <div class="contact-item"><div class="icon-wrap"><svg class="icon"><use href="#i-phone"></use></svg></div><div><b>Phone / WhatsApp</b><span><a href="tel:+919616881048">+91 96168 81048</a></span></div></div>
+                <div class="contact-item"><div class="icon-wrap"><svg class="icon"><use href="#i-mail"></use></svg></div><div><b>Email</b><span><a href="mailto:atulsrivastava1246@gmail.com">atulsrivastava1246@gmail.com</a></span></div></div>
+                <div class="contact-item"><div class="icon-wrap"><svg class="icon"><use href="#i-pin"></use></svg></div><div><b>Location</b><span>Online (All India) + Offline Center</span></div></div>
+                <div class="contact-item"><div class="icon-wrap"><svg class="icon"><use href="#i-clock"></use></svg></div><div><b>Timing</b><span>Mon–Sat, 9:00 AM – 8:00 PM</span></div></div>
+                <div class="contact-item">
+                    <div class="icon-wrap"><svg class="icon"><use href="#i-instagram"></use></svg></div>
+                    <div><b>Follow Us</b>
+                        <span>
+                            <a href="https://www.instagram.com/aethelbotics5331/" target="_blank" rel="noopener">Instagram</a> ·
+                            <a href="https://www.facebook.com/search/top?q=atul%20srivastav" target="_blank" rel="noopener">Facebook</a> ·
+                            <a href="https://www.linkedin.com/in/atul-srivastav-476b282b3" target="_blank" rel="noopener">LinkedIn</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🔴 FORMSPREE FORM — apni ID paste karo neeche action me -->
+            <form class="form-card reveal d1"
+                  id="contactForm"
+                  action="https://formspree.io/f/xgavywjr"
+                  method="POST"
+                  novalidate>
+
+                <input type="hidden" name="_subject" value="New Aethelbotics Enquiry">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://aethelbotics.com/thank-you">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="10-digit number" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="program">Interested In</label>
+                        <select id="program" name="program" required>
+                            <option value="">Select an option</option>
+                            <option>Class 1–5 · Junior Robotics</option>
+                            <option>Class 6–8 · Robotics Foundation</option>
+                            <option>Class 9–12 · Advanced Robotics</option>
+                            <option>B.Tech Final Year Project</option>
+                            <option>BCA Project Program</option>
+                            <option>MCA Advanced Projects</option>
+                            <option>Programming Kit</option>
+                            <option>Electronics Kit</option>
+                            <option>IoT Kit</option>
+                            <option>STEM Lab for School (₹2 Lakhs)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group full" style="margin-bottom:16px">
+                    <label for="message">Message (Optional)</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your requirement..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-grad btn-block" id="submitBtn">
+                    <span class="btn-label">Book Free Demo Class</span>
+                    <span class="btn-loader"></span>
+                </button>
+                <p class="form-note">
+                    <svg class="icon" style="font-size:.9em;color:var(--green)"><use href="#i-shield"></use></svg>
+                    Your information is safe with us. We never share your data.
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#home" class="logo"><span class="logo-mark">AE</span><span class="logo-txt">Aethel<em>botics</em></span></a>
+                <p>Robotics &amp; STEAM learning for Class 1–12, BTech, BCA and MCA students. Kits, Final Year Projects and complete STEM Lab setup for schools.</p>
+                <div class="social-links" style="margin-top:20px;">
+                    <a href="https://www.instagram.com/aethelbotics5331/" target="_blank" rel="noopener" class="insta" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"></use></svg></a>
+                    <a href="https://www.facebook.com/search/top?q=atul%20srivastav" target="_blank" rel="noopener" class="fb" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"></use></svg></a>
+                    <a href="https://www.linkedin.com/in/atul-srivastav-476b282b3" target="_blank" rel="noopener" class="li" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"></use></svg></a>
+                    <a href="https://wa.me/919616881048" target="_blank" rel="noopener" class="wa" aria-label="WhatsApp"><svg class="icon"><use href="#i-whatsapp"></use></svg></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Programs</h5>
+                <ul>
+                    <li><a href="#programs">Class 1–5</a></li>
+                    <li><a href="#programs">Class 6–8</a></li>
+                    <li><a href="#programs">Class 9–12</a></li>
+                    <li><a href="#programs">BTech Projects</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Resources</h5>
+                <ul>
+                    <li><a href="#kits">Learning Kits</a></li>
+                    <li><a href="#stemlab">STEM Lab</a></li>
+                    <li><a href="#books">STEAM Books</a></li>
+                    <li><a href="#included">What's Included</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Connect</h5>
+                <ul>
+                    <li><a href="tel:+919616881048">+91 96168 81048</a></li>
+                    <li><a href="mailto:atulsrivastava1246@gmail.com">Email Us</a></li>
+                    <li><a href="https://www.instagram.com/aethelbotics5331/" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="https://www.linkedin.com/in/atul-srivastav-476b282b3" target="_blank" rel="noopener">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Aethelbotics. All rights reserved.</p>
+            <p>Made with ❤️ for future innovators</p>
+        </div>
+    </div>
+</footer>
+
+<!-- CHATBOT -->
+<div class="chat-fab" id="chatFab" role="button" aria-label="Open chat">
+    <svg class="icon"><use href="#i-chat"></use></svg>
+    <span class="notif">1</span>
+</div>
+
+<div class="chat-window" id="chatWindow">
+    <div class="chat-head">
+        <div class="bot-avatar"><svg class="icon"><use href="#i-robot"></use></svg></div>
+        <div class="bot-info">
+            <b>Aethe Bot</b>
+            <span>Online · Ready to help</span>
+        </div>
+        <div class="chat-close" id="chatClose" role="button" aria-label="Close chat">
+            <svg class="icon"><use href="#i-close"></use></svg>
+        </div>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-quick" id="chatQuick">
+        <button data-q="Tell me about kits">Kits</button>
+        <button data-q="STEM Lab for school">STEM Lab</button>
+        <button data-q="Final year projects">Projects</button>
+        <button data-q="Book free demo">Book Demo</button>
+    </div>
+    <div class="chat-foot">
+        <input type="text" id="chatInput" placeholder="Type your message..." aria-label="Chat message">
+        <button id="chatSend" aria-label="Send"><svg class="icon"><use href="#i-send"></use></svg></button>
+    </div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div class="modal-backdrop" id="loginBackdrop">
+    <div class="admin-login-modal" id="loginModal">
+        <button class="modal-close" id="loginClose" aria-label="Close"><svg class="icon"><use href="#i-close"></use></svg></button>
+        <div class="login-icon"><svg class="icon"><use href="#i-lock"></use></svg></div>
+        <h3>Admin Access</h3>
+        <p>Sign in to view all Aethelbotics enquiries</p>
+        <form id="loginForm">
+            <div class="login-field">
+                <input type="text" id="adminUsername" placeholder="Username" autocomplete="username" required>
+                <svg class="icon field-icon"><use href="#i-user"></use></svg>
+            </div>
+            <div class="login-field">
+                <input type="password" id="adminPassword" placeholder="Password" autocomplete="current-password" required>
+                <svg class="icon field-icon"><use href="#i-lock"></use></svg>
+                <span class="toggle-pwd" id="togglePwd" role="button" aria-label="Show password">
+                    <svg class="icon"><use href="#i-eye"></use></svg>
+                </span>
+            </div>
+            <div class="login-options">
+                <label>
+                    <input type="checkbox" id="rememberMe">
+                    Remember me
+                </label>
+                <a href="#" onclick="event.preventDefault();">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn btn-grad btn-block">
+                <svg class="icon"><use href="#i-shield"></use></svg>
+                Secure Sign In
+            </button>
+            <p class="login-attempts" id="loginAttempts"></p>
+        </form>
+        <p class="login-secure">
+            <svg class="icon"><use href="#i-lock"></use></svg>
+            Protected with 256-bit encryption
+        </p>
+    </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="admin-dashboard" id="adminDashboard">
+    <div class="admin-dash-inner">
+        <header class="admin-dash-header">
+            <div class="admin-dash-title">
+                <span class="admin-icon"><svg class="icon"><use href="#i-user"></use></svg></span>
+                <div>
+                    <h2>Aethelbotics · Admin Dashboard</h2>
+                    <span class="admin-live"><i></i>Live · Enquiries saved automatically</span>
+                </div>
+            </div>
+            <div class="admin-dash-actions">
+                <button class="btn btn-ghost btn-sm" id="exportCsv"><svg class="icon"><use href="#i-download"></use></svg> Export CSV</button>
+                <button class="btn btn-ghost btn-sm" id="logoutBtn"><svg class="icon"><use href="#i-logout"></use></svg> Logout</button>
+                <button class="admin-dash-close" id="dashClose" aria-label="Close"><svg class="icon"><use href="#i-close"></use></svg></button>
+            </div>
+        </header>
+
+        <div class="admin-stats-row">
+            <div class="admin-stat">
+                <div class="admin-stat-icon si-1"><svg class="icon"><use href="#i-mail"></use></svg></div>
+                <div><b id="statTotal">0</b><span>Total Enquiries</span></div>
+            </div>
+            <div class="admin-stat">
+                <div class="admin-stat-icon si-2"><svg class="icon"><use href="#i-sparkles"></use></svg></div>
+                <div><b id="statNew">0</b><span>New / Unread</span></div>
+            </div>
+            <div class="admin-stat">
+                <div class="admin-stat-icon si-3"><svg class="icon"><use href="#i-check"></use></svg></div>
+                <div><b id="statContacted">0</b><span>Contacted</span></div>
+            </div>
+            <div class="admin-stat">
+                <div class="admin-stat-icon si-4"><svg class="icon"><use href="#i-chart"></use></svg></div>
+                <div><b id="statToday">0</b><span>Today</span></div>
+            </div>
+        </div>
+
+        <div class="admin-toolbar">
+            <div class="admin-search">
+                <svg class="icon"><use href="#i-search"></use></svg>
+                <input type="text" id="adminSearch" placeholder="Search by name, email, phone or program...">
+            </div>
+            <select id="adminFilter" class="admin-filter">
+                <option value="all">All Enquiries</option>
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="closed">Closed</option>
+            </select>
+        </div>
+
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Program</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="adminTableBody"></tbody>
+            </table>
+            <div class="admin-empty" id="adminEmpty">
+                <svg class="icon"><use href="#i-file"></use></svg>
+                <h4>No enquiries yet</h4>
+                <p>When someone submits the contact form, their enquiry will appear here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ============================================================
+   AETHELBOTICS — JAVASCRIPT
+   ============================================================ */
+
+const ADMIN_USERNAME = 'Atul';
+const ADMIN_PASSWORD = 'atul789@';
+const STORAGE_KEY = 'aethelbotics_enquiries';
+
+const $ = (s, p = document) => p.querySelector(s);
+const $$ = (s, p = document) => [...p.querySelectorAll(s)];
+
+function toast(message, type = 'info') {
+    const wrap = $('#toastWrap');
+    if (!wrap) return;
+    const div = document.createElement('div');
+    div.className = 'toast ' + type;
+    const icons = {
+        success: '<polyline points="20 6 9 17 4 12"></polyline>',
+        error:   '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>',
+        info:    '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>'
+    };
+    div.innerHTML = `<span class="t-icon"><svg class="icon" viewBox="0 0 24 24">${icons[type] || icons.info}</svg></span><span>${message}</span>`;
+    wrap.appendChild(div);
+    setTimeout(() => { div.classList.add('removing'); setTimeout(() => div.remove(), 300); }, 3500);
+}
+function escapeHtml(str = '') {
+    return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function formatDate(iso) {
+    try {
+        return new Date(iso).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    } catch { return iso; }
+}
+function loadEnquiries() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+}
+function saveEnquiries(list) { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+function isToday(iso) {
+    const d = new Date(iso), n = new Date();
+    return d.toDateString() === n.toDateString();
+}
+
+/* SCROLL PROGRESS + CURSOR GLOW */
+(function initScrollProgressAndGlow() {
+    const bar  = $('#scrollProgress');
+    const glow = $('#cursorGlow');
+    if (bar) {
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
+        }, { passive: true });
+    }
+    if (glow && window.matchMedia('(pointer: fine)').matches) {
+        let gx = window.innerWidth / 2, gy = window.innerHeight / 2;
+        let tx = gx, ty = gy;
+        document.addEventListener('mousemove', (e) => {
+            tx = e.clientX; ty = e.clientY;
+            glow.style.opacity = '1';
+        });
+        document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+        (function loop() {
+            gx += (tx - gx) * 0.12;
+            gy += (ty - gy) * 0.12;
+            glow.style.left = gx + 'px';
+            glow.style.top  = gy + 'px';
+            requestAnimationFrame(loop);
+        })();
+    } else if (glow) { glow.style.display = 'none'; }
+})();
+
+/* MOBILE MENU */
+(function initMobileMenu() {
+    const burger   = $('#burger');
+    const menu     = $('#menu');
+    const backdrop = $('#menuBackdrop');
+    if (!burger || !menu) return;
+    function toggle(open) {
+        const isOpen = open ?? !menu.classList.contains('open');
+        menu.classList.toggle('open', isOpen);
+        burger.classList.toggle('open', isOpen);
+        if (backdrop) backdrop.classList.toggle('show', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+    burger.addEventListener('click', () => toggle());
+    if (backdrop) backdrop.addEventListener('click', () => toggle(false));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+})();
+
+/* NAVBAR SCROLL + ACTIVE LINK */
+(function initNavbar() {
+    const nav = $('#nav');
+    if (nav) {
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
+    }
+    const sections = $$('section[id]');
+    const navLinks = $$('.menu a');
+    if (!sections.length || !navLinks.length) return;
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                const id = e.target.id;
+                navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+            }
+        });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => obs.observe(s));
+})();
+
+/* REVEAL */
+(function initReveal() {
+    const els = $$('.reveal');
+    if (!els.length) return;
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => obs.observe(el));
+})();
+
+/* TYPING */
+(function initTyping() {
+    const typedEl = $('#typed');
+    if (!typedEl) return;
+    const cursor = typedEl.querySelector('.cur');
+    const phrases = [
+        'Robotics for Class 1–12',
+        'Final Year Projects for BTech',
+        'IoT & AI for Young Innovators',
+        'STEM Labs for Schools @ ₹2 Lakhs',
+        'Programming · Electronics · IoT Kits'
+    ];
+    let pIdx = 0, cIdx = 0, deleting = false;
+    if (!typedEl.firstChild || typedEl.firstChild === cursor) {
+        typedEl.insertBefore(document.createTextNode(''), cursor);
+    }
+    function loop() {
+        const current = phrases[pIdx];
+        const textNode = typedEl.firstChild;
+        if (!deleting) {
+            cIdx++;
+            if (textNode) textNode.textContent = current.slice(0, cIdx);
+            if (cIdx === current.length) { deleting = true; setTimeout(loop, 1600); return; }
+            setTimeout(loop, 55);
+        } else {
+            cIdx--;
+            if (textNode) textNode.textContent = current.slice(0, cIdx);
+            if (cIdx === 0) {
+                deleting = false;
+                pIdx = (pIdx + 1) % phrases.length;
+                setTimeout(loop, 300); return;
+            }
+            setTimeout(loop, 25);
+        }
+    }
+    loop();
+})();
+
+/* COUNTERS */
+(function initCounters() {
+    const counters = $$('[data-count]');
+    if (!counters.length) return;
+    function animate(el) {
+        if (el.dataset.animated === 'true') return;
+        el.dataset.animated = 'true';
+        const target = +el.dataset.count || 0;
+        const duration = 1800;
+        const start = performance.now();
+        (function update(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * eased).toLocaleString('en-IN');
+            if (p < 1) requestAnimationFrame(update);
+        })(start);
+    }
+    if (!('IntersectionObserver' in window)) { counters.forEach(animate); return; }
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); }
+        });
+    }, { threshold: 0.1 });
+    counters.forEach(c => obs.observe(c));
+    setTimeout(() => {
+        counters.forEach(c => {
+            if (c.textContent === '0' || c.textContent === '') animate(c);
+        });
+    }, 2000);
+})();
+
+/* HERO CANVAS */
+(function initHeroCanvas() {
+    const canvas = $('#heroCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const COUNT = 60, DIST = 130;
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width  = rect.width  * devicePixelRatio;
+        canvas.height = rect.height * devicePixelRatio;
+        canvas.style.width  = rect.width  + 'px';
+        canvas.style.height = rect.height + 'px';
+        ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    function init() {
+        particles = [];
+        const w = canvas.width / devicePixelRatio;
+        const h = canvas.height / devicePixelRatio;
+        for (let i = 0; i < COUNT; i++) {
+            particles.push({
+                x: Math.random() * w, y: Math.random() * h,
+                vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4,
+                r: Math.random() * 1.8 + .8
+            });
+        }
+    }
+    function draw() {
+        const w = canvas.width / devicePixelRatio;
+        const h = canvas.height / devicePixelRatio;
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const d = Math.hypot(dx, dy);
+                if (d < DIST) {
+                    ctx.strokeStyle = `rgba(0,229,255,${(1 - d / DIST) * .18})`;
+                    ctx.lineWidth = .6;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(168,85,247,.7)';
+            ctx.fill();
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+        });
+        requestAnimationFrame(draw);
+    }
+    resize(); init(); draw();
+    window.addEventListener('resize', () => { resize(); init(); });
+})();
+
+/* MAGNETIC BUTTONS */
+(function initMagneticButtons() {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    $$('.btn-magnetic').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const r = btn.getBoundingClientRect();
+            const x = e.clientX - r.left - r.width / 2;
+            const y = e.clientY - r.top  - r.height / 2;
+            btn.style.transform = `translate(${x * .15}px, ${y * .25}px)`;
+        });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+})();
+
+/* RIPPLE */
+(function initRipple() {
+    $$('.btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top  - size / 2;
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top  = y + 'px';
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 650);
+        });
+    });
+})();
+
+/* TILT */
+(function initTilt() {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    const MAX = 8;
+    $$('.tilt-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width;
+            const py = (e.clientY - r.top)  / r.height;
+            const rotY = (px - .5) * MAX * 2;
+            const rotX = (.5 - py) * MAX * 2;
+            card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+})();
+
+/* CONTACT FORM — Native Formspree submission */
+(function initContactForm() {
+    const form = $('#contactForm');
+    if (!form) return;
+    const submitBtn = $('#submitBtn');
+
+    form.addEventListener('submit', function (e) {
+        const name    = $('#name').value.trim();
+        const phone   = $('#phone').value.trim();
+        const email   = $('#email').value.trim();
+        const program = $('#program').value;
+        const message = $('#message').value.trim();
+
+        if (!name) { e.preventDefault(); toast('Please enter your name.', 'error'); $('#name').focus(); return; }
+        if (!/^\d{10}$/.test(phone)) { e.preventDefault(); toast('Please enter a valid 10-digit phone number.', 'error'); $('#phone').focus(); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { e.preventDefault(); toast('Please enter a valid email address.', 'error'); $('#email').focus(); return; }
+        if (!program) { e.preventDefault(); toast('Please select a program.', 'error'); $('#program').focus(); return; }
+
+        const actionUrl = form.getAttribute('action') || '';
+        if (!actionUrl || actionUrl.includes('YOUR_FORM_ID')) {
+            e.preventDefault();
+            toast('⚠️ Formspree URL not configured.', 'error');
+            console.error('❌ Formspree URL missing! Update action="..." in <form> tag.');
+            return;
+        }
+
+        const data = {
+            name, phone, email, program, message,
+            date: new Date().toISOString(),
+            status: 'new',
+            id: Date.now() + '-' + Math.random().toString(36).slice(2, 8)
+        };
+        const all = loadEnquiries();
+        all.unshift(data);
+        saveEnquiries(all);
+        if (typeof window.updateAdminBadge === 'function') window.updateAdminBadge();
+
+        submitBtn?.classList.add('loading');
+        toast('Sending your enquiry...', 'info');
+    });
+
+    window.addEventListener('pageshow', () => {
+        submitBtn?.classList.remove('loading');
+    });
+})();
+
+/* CHATBOT */
+(function initChatbot() {
+    const fab     = $('#chatFab');
+    const win     = $('#chatWindow');
+    const closeEl = $('#chatClose');
+    const body    = $('#chatBody');
+    const input   = $('#chatInput');
+    const sendBtn = $('#chatSend');
+    const quick   = $('#chatQuick');
+    const notif   = fab?.querySelector('.notif');
+    if (!fab || !win || !body) return;
+    let opened = false;
+
+    const replies = [
+        { match: /kit|programming|electronics|iot kit/i, reply: "Aethelbotics me 3 kits hain 👇\n💻 Programming Kit — ₹1,499\n⚡ Electronics Kit — ₹1,999\n📡 IoT Kit — ₹2,999\n\nHar kit me hardware + manuals + video tutorials + lifetime mentor support." },
+        { match: /stem|lab|school|2 ?lakh|200000/i, reply: "Aethelbotics schools me complete STEM Labs setup karta hai — sirf ₹2,00,000 me! 🏫\n\nIncludes: Hardware + Robotics/IoT/AI Kits + Software + Curriculum + Teacher Training + 1-Year Support." },
+        { match: /project|final ?year|btech|mca|bca/i, reply: "Aethelbotics Final Year Projects deta hai BTech, BCA & MCA ke liye 🎓\n\n✅ Complete source code\n✅ Circuit diagrams & connections\n✅ Documentation + PPT\n✅ Live 1-on-1 explanation" },
+        { match: /demo|book|free/i, reply: "Free demo class book karne ke liye share karein:\n• Aapka naam\n• Phone number\n• Program\n\nYa call/WhatsApp: +91 96168 81048" },
+        { match: /price|cost|fee|charge/i, reply: "Aethelbotics pricing 👇\n💻 Programming Kit — ₹1,499\n⚡ Electronics Kit — ₹1,999\n📡 IoT Kit — ₹2,999\n🏫 STEM Lab for Schools — ₹2,00,000" },
+        { match: /class|grade/i, reply: "Aethelbotics Class 1–12 students ko padhata hai 🎒\n\n• Class 1–5: Junior Robotics\n• Class 6–8: Robotics Foundation\n• Class 9–12: Advanced Robotics & IoT" },
+        { match: /contact|call|phone|whatsapp|number/i, reply: "📞 +91 96168 81048\n📧 atulsrivastava1246@gmail.com\n📸 Instagram: @aethelbotics5331\n\nMon–Sat, 9 AM – 8 PM" },
+        { match: /hello|hi|hey|namaste/i, reply: "Namaste! 🙏 Aethelbotics me aapka swagat hai. Main Aethe Bot hun. Kaise help kar sakta hun?" },
+        { match: /thank|thanks|dhanyavad/i, reply: "Aapka swagat hai! 😊 Happy learning! 🚀" },
+        { match: /social|instagram|facebook|linkedin|follow/i, reply: "Follow us 👇\n📸 instagram.com/aethelbotics5331\n📘 Facebook: @atul srivastav\n💼 LinkedIn: atul-srivastav-476b282b3" }
+    ];
+
+    function addMsg(text, who = 'bot') {
+        const div = document.createElement('div');
+        div.className = 'msg ' + who;
+        div.textContent = text;
+        body.appendChild(div);
+        body.scrollTop = body.scrollHeight;
+        return div;
+    }
+    function addTyping() {
+        const div = document.createElement('div');
+        div.className = 'msg bot typing';
+        div.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+        body.appendChild(div);
+        body.scrollTop = body.scrollHeight;
+        return div;
+    }
+    function getReply(text) {
+        for (const r of replies) if (r.match.test(text)) return r.reply;
+        return "Hmm, ye samajh nahi aaya 🤔\n\nAap puch sakte hain:\n• Kits\n• STEM Labs\n• Final Year Projects\n• Pricing & Demo\n\nYa call: +91 96168 81048";
+    }
+    function send(text) {
+        text = (text || '').trim();
+        if (!text) return;
+        addMsg(text, 'user');
+        input.value = '';
+        const typing = addTyping();
+        setTimeout(() => {
+            typing.remove();
+            addMsg(getReply(text), 'bot');
+        }, 700 + Math.random() * 500);
+    }
+    function openChat() {
+        win.classList.add('open');
+        if (notif) notif.style.display = 'none';
+        if (!opened) {
+            opened = true;
+            setTimeout(() => addMsg("Hi! 👋 Main Aethe Bot hun — Aethelbotics se.\n\nKaise help kar sakta hun?", 'bot'), 300);
+        }
+        setTimeout(() => input.focus(), 400);
+    }
+    function closeChat() { win.classList.remove('open'); }
+
+    fab.addEventListener('click', () => {
+        win.classList.contains('open') ? closeChat() : openChat();
+    });
+    closeEl?.addEventListener('click', closeChat);
+    sendBtn?.addEventListener('click', () => send(input.value));
+    input?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); send(input.value); }
+    });
+    quick?.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (btn && btn.dataset.q) send(btn.dataset.q);
+    });
+})();
+
+/* ADMIN PANEL */
+(function initAdmin() {
+    const adminBtn    = $('#adminBtn');
+    const adminBadge  = $('#adminBadge');
+    const loginBk     = $('#loginBackdrop');
+    const loginClose  = $('#loginClose');
+    const loginForm   = $('#loginForm');
+    const userInput   = $('#adminUsername');
+    const pwdInput    = $('#adminPassword');
+    const togglePwd   = $('#togglePwd');
+    const rememberMe  = $('#rememberMe');
+    const attemptsEl  = $('#loginAttempts');
+    const dashboard   = $('#adminDashboard');
+    const dashClose   = $('#dashClose');
+    const logoutBtn   = $('#logoutBtn');
+    const exportBtn   = $('#exportCsv');
+    const searchInput = $('#adminSearch');
+    const filterSel   = $('#adminFilter');
+    const tableBody   = $('#adminTableBody');
+    const emptyState  = $('#adminEmpty');
+
+    const statTotal     = $('#statTotal');
+    const statNew       = $('#statNew');
+    const statContacted = $('#statContacted');
+    const statToday     = $('#statToday');
+
+    if (!adminBtn || !loginBk || !dashboard) return;
+    let isLoggedIn = false;
+    let failedAttempts = 0;
+
+    try {
+        const saved = localStorage.getItem('aethelbotics_admin_user');
+        if (saved && userInput) userInput.value = saved;
+    } catch {}
+
+    togglePwd?.addEventListener('click', () => {
+        const isPwd = pwdInput.type === 'password';
+        pwdInput.type = isPwd ? 'text' : 'password';
+        const icon = togglePwd.querySelector('use');
+        if (icon) icon.setAttribute('href', isPwd ? '#i-eye-off' : '#i-eye');
+    });
+
+    window.updateAdminBadge = function () {
+        const list = loadEnquiries();
+        const newCount = list.filter(x => x.status === 'new').length;
+        if (adminBadge) {
+            if (newCount > 0) { adminBadge.textContent = newCount; adminBadge.classList.remove('hidden'); }
+            else adminBadge.classList.add('hidden');
+        }
+    };
+
+    adminBtn.addEventListener('click', () => {
+        if (isLoggedIn) openDashboard();
+        else {
+            loginBk.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => userInput?.focus(), 250);
+        }
+    });
+
+    function closeLogin() {
+        loginBk.classList.remove('open');
+        document.body.style.overflow = '';
+        if (pwdInput) pwdInput.value = '';
+        if (attemptsEl) attemptsEl.textContent = '';
+    }
+    loginClose?.addEventListener('click', closeLogin);
+    loginBk.addEventListener('click', (e) => { if (e.target === loginBk) closeLogin(); });
+
+    loginForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const u = (userInput?.value || '').trim();
+        const p = (pwdInput?.value || '').trim();
+
+        if (u === ADMIN_USERNAME && p === ADMIN_PASSWORD) {
+            isLoggedIn = true;
+            failedAttempts = 0;
+            if (rememberMe?.checked) {
+                try { localStorage.setItem('aethelbotics_admin_user', u); } catch {}
+            } else {
+                try { localStorage.removeItem('aethelbotics_admin_user'); } catch {}
+            }
+            closeLogin();
+            toast('Welcome back, Atul! 🔓', 'success');
+            setTimeout(openDashboard, 300);
+        } else {
+            failedAttempts++;
+            if (attemptsEl) attemptsEl.textContent = `❌ Invalid credentials. Attempt ${failedAttempts}/3`;
+            toast('Invalid username or password.', 'error');
+            if (pwdInput) pwdInput.value = '';
+            pwdInput?.focus();
+            if (failedAttempts >= 3) {
+                toast('Too many failed attempts. Please wait 30s.', 'error');
+                const btn = loginForm.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.disabled = false;
+                    failedAttempts = 0;
+                    if (attemptsEl) attemptsEl.textContent = '';
+                }, 30000);
+            }
+        }
+    });
+
+    function openDashboard() {
+        dashboard.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        renderTable();
+        updateStats();
+    }
+    function closeDashboard() {
+        dashboard.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    dashClose?.addEventListener('click', closeDashboard);
+    logoutBtn?.addEventListener('click', () => {
+        isLoggedIn = false;
+        closeDashboard();
+        toast('Logged out successfully.', 'info');
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (loginBk.classList.contains('open')) closeLogin();
+            if (dashboard.classList.contains('open')) closeDashboard();
+        }
+    });
+
+    function updateStats() {
+        const list = loadEnquiries();
+        if (statTotal)     statTotal.textContent     = list.length;
+        if (statNew)       statNew.textContent       = list.filter(x => x.status === 'new').length;
+        if (statContacted) statContacted.textContent = list.filter(x => x.status === 'contacted').length;
+        if (statToday)     statToday.textContent     = list.filter(x => isToday(x.date)).length;
+        window.updateAdminBadge();
+    }
+
+    function renderTable() {
+        if (!tableBody) return;
+        const list = loadEnquiries();
+        const q = (searchInput?.value || '').toLowerCase().trim();
+        const filter = filterSel?.value || 'all';
+
+        const filtered = list.filter(item => {
+            if (filter !== 'all' && item.status !== filter) return false;
+            if (!q) return true;
+            return (
+                (item.name || '').toLowerCase().includes(q) ||
+                (item.email || '').toLowerCase().includes(q) ||
+                (item.phone || '').toLowerCase().includes(q) ||
+                (item.program || '').toLowerCase().includes(q) ||
+                (item.message || '').toLowerCase().includes(q)
+            );
+        });
+
+        tableBody.innerHTML = '';
+        if (!filtered.length) {
+            if (emptyState) emptyState.classList.add('show');
+            return;
+        }
+        if (emptyState) emptyState.classList.remove('show');
+
+        filtered.forEach((item, idx) => {
+            const tr = document.createElement('tr');
+            const statusClass = 'status-' + (item.status || 'new');
+            const statusLabel = (item.status || 'new').toUpperCase();
+            tr.innerHTML = `
+                <td class="col-idx">${idx + 1}</td>
+                <td class="col-name"><b>${escapeHtml(item.name)}</b></td>
+                <td class="col-contact">
+                    <a href="tel:${escapeHtml(item.phone)}">${escapeHtml(item.phone)}</a>
+                    <a href="mailto:${escapeHtml(item.email)}">${escapeHtml(item.email)}</a>
+                </td>
+                <td class="col-prog">${escapeHtml(item.program || '—')}</td>
+                <td class="col-msg">${escapeHtml(item.message || '—')}</td>
+                <td class="col-date">${formatDate(item.date)}</td>
+                <td><span class="status-pill ${statusClass}">${statusLabel}</span></td>
+                <td>
+                    <div class="row-actions">
+                        <button class="row-action act-contact" data-act="contacted" data-id="${item.id}" title="Mark Contacted">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </button>
+                        <button class="row-action act-close" data-act="closed" data-id="${item.id}" title="Mark Closed">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
+                        <button class="row-action act-del" data-act="delete" data-id="${item.id}" title="Delete">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+
+    tableBody?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.row-action');
+        if (!btn) return;
+        const id  = btn.dataset.id;
+        const act = btn.dataset.act;
+        let list = loadEnquiries();
+        if (act === 'delete') {
+            if (!confirm('Delete this enquiry?')) return;
+            list = list.filter(x => x.id !== id);
+            saveEnquiries(list);
+            toast('Enquiry deleted.', 'info');
+        } else {
+            list = list.map(x => x.id === id ? { ...x, status: act } : x);
+            saveEnquiries(list);
+            toast(`Marked as ${act}.`, 'success');
+        }
+        renderTable();
+        updateStats();
+    });
+
+    searchInput?.addEventListener('input', renderTable);
+    filterSel?.addEventListener('change', renderTable);
+
+    exportBtn?.addEventListener('click', () => {
+        const list = loadEnquiries();
+        if (!list.length) { toast('No enquiries to export.', 'info'); return; }
+        const headers = ['Date', 'Name', 'Phone', 'Email', 'Program', 'Message', 'Status'];
+        const rows = list.map(x => [
+            formatDate(x.date),
+            x.name, x.phone, x.email,
+            x.program, x.message || '', x.status || 'new'
+        ]);
+        const csv = [headers, ...rows]
+            .map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','))
+            .join('\n');
+        const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement('a');
+        a.href = url;
+        a.download = `aethelbotics-enquiries-${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        toast('CSV exported successfully!', 'success');
+    });
+
+    updateAdminBadge();
+    window.addEventListener('storage', updateAdminBadge);
+})();
+
+/* INIT */
+window.addEventListener('load', () => {
+    if (typeof window.updateAdminBadge === 'function') window.updateAdminBadge();
+});
+</script>
+</body>
+</html>
