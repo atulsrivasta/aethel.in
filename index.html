@@ -213,44 +213,90 @@ section { padding: 90px 0; position: relative; }
 .included-card:nth-child(3)::before { background: linear-gradient(90deg, #ff2e93, #ff5ea6); }
 .included-card:nth-child(4)::before { background: linear-gradient(90deg, #ffc93c, #ffb020); }
 
-/* KITS */
-.kit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 30px 26px; transition: all .4s cubic-bezier(.2,.8,.2,1); position: relative; overflow: hidden; display: flex; flex-direction: column; }
-.kit-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: .6; transition: opacity .3s; }
-.kit-card:hover::before { opacity: 1; }
-.kit-card:hover { transform: translateY(-10px) scale(1.01); border-color: rgba(0, 229, 255, .35); box-shadow: 0 30px 60px -25px rgba(0, 229, 255, .35); background: var(--surface2); }
-.kit-visual { height: 140px; border-radius: 18px; margin-bottom: 20px; display: grid; place-items: center; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(0,229,255,.15), rgba(168,85,247,.15)); border: 1px solid var(--border); }
-.kit-visual::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.1), transparent 60%); }
-.kit-card:hover .kit-visual { animation: kitShake 1s ease-in-out; }
-@keyframes kitShake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-3deg) scale(1.03); } 75% { transform: rotate(3deg) scale(1.03); } }
-.kit-visual .kit-emoji { font-size: 3.4rem; filter: drop-shadow(0 0 20px rgba(0,229,255,.5)); z-index: 1; }
-.kit-card h3 { font-size: 1.25rem; margin-bottom: 8px; }
-.kit-card > p { font-size: .9rem; color: var(--muted); margin-bottom: 16px; }
-.kit-card ul { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
-.kit-card li { font-size: .85rem; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; }
-.kit-card li::before { content: '▸'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
-.kit-price-row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); gap: 12px; flex-wrap: wrap; }
-.kit-price { font-family: var(--display); font-size: 1.5rem; font-weight: 700; }
-.kit-price small { font-size: .72rem; color: var(--muted); text-decoration: line-through; margin-left: 6px; font-weight: 400; }
-.kit-price span { color: var(--cyan); }
+/* ============================================================
+   KITS — SHOWCASE WITH IMAGES + ANIMATION
+   ============================================================ */
+.kits-wrapper { display: flex; flex-direction: column; gap: 80px; margin-top: 40px; }
+.kit-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; }
+.kit-showcase-reverse { direction: rtl; }
+.kit-showcase-reverse > * { direction: ltr; }
 
-/* STEM LAB */
-.stem-lab { background: linear-gradient(135deg, rgba(0,229,255,.08), rgba(168,85,247,.08), rgba(255,46,147,.06)); border-radius: 32px; padding: 60px 50px; position: relative; overflow: hidden; border: 1px solid rgba(0,229,255,.2); }
-.stem-lab::before { content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,229,255,.25), transparent 70%); border-radius: 50%; animation: stemOrbit 20s linear infinite; }
-@keyframes stemOrbit { to { transform: rotate(360deg); } }
-.stem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; position: relative; z-index: 2; }
-.stem-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,201,60,.1); border: 1px solid rgba(255,201,60,.35); color: var(--gold); padding: 8px 18px; border-radius: 40px; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 18px; }
-.stem-lab h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); margin-bottom: 18px; }
-.stem-lab > .stem-grid > div > p { color: var(--muted); margin-bottom: 24px; }
-.stem-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 30px; }
-.stem-feature { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; }
-.stem-feature .check { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: var(--grad); display: grid; place-items: center; font-size: .7rem; color: #fff; font-weight: 800; }
-.stem-price-box { background: rgba(0,0,0,.35); border: 1px solid rgba(0,229,255,.25); border-radius: 22px; padding: 32px; backdrop-filter: blur(14px); text-align: center; position: relative; }
-.stem-price-box::before { content: 'SPECIAL OFFER'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--grad); padding: 5px 16px; border-radius: 40px; font-size: .7rem; font-weight: 800; letter-spacing: .1em; color: #fff; white-space: nowrap; }
-.stem-price-box .old-price { font-size: 1rem; color: var(--muted); text-decoration: line-through; }
-.stem-price-box .new-price { font-family: var(--display); font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin: 10px 0 4px; }
-.stem-price-box .price-label { font-size: .85rem; color: var(--muted); margin-bottom: 22px; }
-.stem-price-box .includes { font-size: .78rem; color: var(--muted); margin-top: 16px; line-height: 1.7; }
-.stem-price-box .includes b { color: var(--cyan); font-weight: 600; }
+.kit-image-side { position: relative; }
+.kit-image-wrapper { position: relative; padding: 40px; border-radius: 30px; background: linear-gradient(135deg, rgba(0,229,255,.08), rgba(168,85,247,.08)); border: 1px solid rgba(0,229,255,.2); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.kit-image-wrapper-alt { background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(255,46,147,.08)); border-color: rgba(168,85,247,.2); }
+.kit-image-wrapper:hover { transform: translateY(-10px) scale(1.02); }
+.kit-image-glow { position: absolute; inset: -30px; background: radial-gradient(circle at 50% 50%, rgba(0,229,255,.25), transparent 65%); border-radius: 50%; filter: blur(60px); z-index: -1; animation: pulseGlow 4s ease-in-out infinite; }
+.kit-image-glow.glow-violet { background: radial-gradient(circle at 50% 50%, rgba(168,85,247,.3), transparent 65%); }
+@keyframes pulseGlow { 0%, 100% { opacity: .6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.15); } }
+.kit-image { width: 100%; height: auto; border-radius: 16px; display: block; animation: kitFloat 6s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgba(0,0,0,.5)); }
+@keyframes kitFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(1deg); } }
+
+.kit-float-badge { position: absolute; display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 40px; font-size: .78rem; font-weight: 600; background: rgba(10, 12, 24, .92); backdrop-filter: blur(10px); border: 1px solid var(--border); color: var(--txt); box-shadow: 0 8px 25px -8px rgba(0,0,0,.7); animation: badgeFloat 4s ease-in-out infinite; z-index: 5; white-space: nowrap; }
+.kit-float-badge span { font-size: .95rem; }
+.kit-float-badge.badge-cyan { border-color: rgba(0,229,255,.4); color: var(--cyan); top: 5%; right: -10px; }
+.kit-float-badge.badge-violet { border-color: rgba(168,85,247,.4); color: var(--violet); bottom: 15%; left: -15px; animation-delay: -1.5s; }
+.kit-float-badge.badge-pink { border-color: rgba(255,46,147,.4); color: var(--pink); bottom: -10px; right: 15%; animation-delay: -3s; }
+@keyframes badgeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+.kit-content-side h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 10px 0 16px; color: #fff; }
+.kit-content-side > p { font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+
+.kit-badge-tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); background: rgba(0,229,255,.1); border: 1px solid rgba(0,229,255,.3); padding: 6px 16px; border-radius: 40px; animation: tagShine 3s ease-in-out infinite; }
+.kit-badge-tag.kit-tag-alt { color: var(--violet); background: rgba(168,85,247,.1); border-color: rgba(168,85,247,.3); }
+@keyframes tagShine { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,255,.4); } 50% { box-shadow: 0 0 20px 4px rgba(0,229,255,.15); } }
+
+.kit-highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 26px; }
+.kit-highlight-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 12px; transition: all .3s; }
+.kit-highlight-item:hover { border-color: rgba(0,229,255,.4); background: rgba(0,229,255,.06); transform: translateY(-3px); }
+.highlight-icon { font-size: 1.1rem; }
+.highlight-text { font-size: .85rem; color: var(--txt); font-weight: 500; }
+
+.kit-components-inline h4 { font-size: 1.05rem; margin-bottom: 14px; color: var(--txt); display: flex; align-items: center; gap: 10px; }
+.kit-components-inline h4::before { content: ''; width: 4px; height: 18px; background: var(--grad); border-radius: 4px; }
+.components-inline-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.component-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 40px; font-size: .82rem; color: var(--txt); transition: all .25s; cursor: default; }
+.component-pill:hover { background: rgba(0,229,255,.08); border-color: rgba(0,229,255,.4); transform: translateY(-2px) scale(1.03); }
+.component-pill .comp-num { font-family: var(--display); font-size: .7rem; font-weight: 700; color: var(--cyan); opacity: .8; }
+
+.kit-detail-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.kit-footer-note { margin-top: 40px; color: var(--muted); font-size: .9rem; }
+
+/* ============================================================
+   STEM LAB PACKAGES
+   ============================================================ */
+.stem-packages { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
+.stem-package-card { position: relative; padding: 42px 34px 36px; border-radius: 26px; background: linear-gradient(160deg, rgba(20, 25, 50, .7), rgba(10, 12, 24, .6)); border: 1px solid var(--border); backdrop-filter: blur(14px); transition: all .4s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; overflow: hidden; isolation: isolate; }
+.stem-package-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #00e5ff, #00a8ff); opacity: .8; }
+.stem-package-card:hover { transform: translateY(-10px); border-color: rgba(0, 229, 255, .4); box-shadow: 0 30px 70px -30px rgba(0, 229, 255, .5); }
+
+.stem-package-premium { background: linear-gradient(160deg, rgba(40, 20, 60, .8), rgba(15, 8, 30, .7)); border-color: rgba(168, 85, 247, .35); }
+.stem-package-premium::before { background: linear-gradient(90deg, #a855f7, #ff2e93, #ffc93c); height: 4px; opacity: 1; background-size: 200% 100%; animation: premiumLine 3s ease-in-out infinite; }
+@keyframes premiumLine { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.stem-package-premium:hover { border-color: rgba(168, 85, 247, .6); box-shadow: 0 30px 70px -30px rgba(168, 85, 247, .6); }
+
+.stem-package-badge { position: absolute; top: 20px; right: 20px; background: rgba(0, 229, 255, .12); color: var(--cyan); border: 1px solid rgba(0, 229, 255, .35); padding: 6px 14px; border-radius: 40px; font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.premium-badge { background: linear-gradient(135deg, rgba(168, 85, 247, .25), rgba(255, 46, 147, .2)); color: #fff; border-color: rgba(255, 46, 147, .5); box-shadow: 0 0 25px -5px rgba(168, 85, 247, .5); animation: premiumBadgePulse 2.5s ease-in-out infinite; }
+@keyframes premiumBadgePulse { 0%, 100% { box-shadow: 0 0 25px -5px rgba(168, 85, 247, .5); } 50% { box-shadow: 0 0 40px 2px rgba(255, 46, 147, .5); } }
+
+.stem-package-icon { width: 70px; height: 70px; border-radius: 20px; display: grid; place-items: center; font-size: 1.8rem; margin-bottom: 22px; transition: transform .4s; }
+.stem-package-card:hover .stem-package-icon { transform: rotate(-8deg) scale(1.1); }
+.sp-basic { background: linear-gradient(135deg, rgba(0, 229, 255, .2), rgba(0, 229, 255, .06)); border: 1px solid rgba(0, 229, 255, .35); color: var(--cyan); box-shadow: 0 0 30px -8px rgba(0, 229, 255, .5); }
+.sp-premium { background: linear-gradient(135deg, rgba(168, 85, 247, .25), rgba(255, 46, 147, .15)); border: 1px solid rgba(168, 85, 247, .5); color: var(--pink); box-shadow: 0 0 30px -8px rgba(168, 85, 247, .6); animation: premiumIconPulse 3s ease-in-out infinite; }
+@keyframes premiumIconPulse { 0%, 100% { box-shadow: 0 0 30px -8px rgba(168, 85, 247, .6); } 50% { box-shadow: 0 0 50px -5px rgba(255, 46, 147, .7); } }
+
+.stem-package-card h3 { font-size: 1.6rem; margin-bottom: 12px; color: #fff; }
+.stem-package-desc { color: var(--muted); font-size: .95rem; line-height: 1.7; margin-bottom: 24px; min-height: 4.8em; }
+.stem-package-price { display: flex; align-items: baseline; gap: 4px; font-family: var(--display); margin-bottom: 4px; }
+.price-currency { font-size: 1.5rem; color: var(--muted); font-weight: 600; }
+.price-amount { font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+.price-suffix { font-size: 1.2rem; color: var(--muted); font-weight: 600; }
+.stem-package-premium .price-amount { background: linear-gradient(135deg, #a855f7, #ff2e93, #ffc93c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.price-note { font-size: .82rem; color: var(--muted); margin-bottom: 26px; }
+
+.stem-package-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; flex-grow: 1; }
+.stem-package-features li { display: flex; gap: 12px; align-items: flex-start; font-size: .92rem; color: var(--txt); line-height: 1.5; }
+.stem-package-features .check { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; font-size: .7rem; color: #fff; font-weight: 800; background: linear-gradient(135deg, #00e5ff, #a855f7); }
+.stem-package-premium .stem-package-features .check { background: linear-gradient(135deg, #a855f7, #ff2e93); }
 
 /* BOOKS */
 .book-card { display: flex; flex-direction: column; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; transition: all .35s; }
@@ -459,10 +505,15 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
     .hero-visual { height: 360px; order: -1; }
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
-    .stem-grid { grid-template-columns: 1fr; gap: 40px; }
-    .stem-lab { padding: 40px 30px; }
     .admin-stats-row { grid-template-columns: repeat(2, 1fr); }
     .nav-cta { display: none; }
+    .kit-showcase { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .kit-showcase-reverse { direction: ltr; }
+    .kit-highlights-grid { justify-content: center; }
+    .components-inline-grid { justify-content: center; }
+    .kit-detail-actions { justify-content: center; }
+    .stem-packages { grid-template-columns: 1fr; gap: 24px; }
+    .stem-package-desc { min-height: auto; }
 }
 @media (max-width: 820px) {
     .menu { position: fixed; top: 0; right: -100%; width: min(320px, 85vw); height: 100vh; flex-direction: column; align-items: stretch; gap: 6px; padding: 90px 24px 30px; background: rgba(6, 7, 15, .98); backdrop-filter: blur(24px); border-left: 1px solid var(--border); transition: right .4s cubic-bezier(.2,.8,.2,1); z-index: 999; }
@@ -473,7 +524,6 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
     .stat:nth-child(3)::before { display: none; }
     .float-badge { display: none; }
     section { padding: 70px 0; }
-    .stem-features { grid-template-columns: 1fr; }
     .admin-dash-header { flex-direction: column; align-items: flex-start; }
     .admin-dash-actions { width: 100%; justify-content: space-between; }
     .admin-table thead th:nth-child(5), .admin-table tbody td.col-msg { display: none; }
@@ -489,8 +539,6 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
     .footer-grid { grid-template-columns: 1fr; gap: 30px; }
     .footer-bottom { flex-direction: column; text-align: center; }
     .stats-strip { padding: 24px 18px; gap: 14px; }
-    .stem-lab { padding: 30px 20px; border-radius: 24px; }
-    .stem-price-box { padding: 26px 20px; }
     .chat-fab { bottom: 16px; right: 16px; width: 54px; height: 54px; font-size: 1.3rem; }
     .chat-window { bottom: 82px; right: 16px; left: 16px; width: auto; }
     .admin-dash-inner { padding: 14px; }
@@ -507,12 +555,19 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
     .included-card { padding: 28px 22px 24px; }
     .included-icon { width: 52px; height: 52px; font-size: 1.4rem; margin-bottom: 18px; }
     .included-num { font-size: 2rem; top: 18px; right: 20px; }
+    .kits-wrapper { gap: 50px; }
+    .kit-image-wrapper { padding: 24px; }
+    .kit-float-badge { font-size: .68rem; padding: 6px 10px; }
+    .kit-highlights-grid { grid-template-columns: 1fr; }
+    .kit-detail-actions { flex-direction: column; }
+    .kit-detail-actions .btn { width: 100%; }
+    .stem-package-card { padding: 32px 24px 28px; }
+    .stem-package-card h3 { font-size: 1.35rem; }
+    .stem-package-badge { top: 16px; right: 16px; font-size: .65rem; }
 }
 @media (max-width: 400px) {
     .hero-btns .btn { width: 100%; }
     .btn { padding: 13px 24px; font-size: .92rem; }
-    .kit-price-row { flex-direction: column; align-items: stretch; }
-    .kit-price-row .btn { width: 100%; }
     .admin-stats-row { grid-template-columns: 1fr; }
     .stat + .stat::before { display: none; }
 }
@@ -664,36 +719,12 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
             <p class="section-sub reveal d2">We don't just teach theory. Every student builds real hardware, writes real code and presents real projects — guided by mentors from top engineering backgrounds.</p>
         </div>
         <div class="grid-3">
-            <div class="card reveal tilt-card">
-                <div class="icon-wrap"><svg class="icon"><use href="#i-cog"></use></svg></div>
-                <h3>Hands-On STEAM Labs</h3>
-                <p>Live virtual + offline lab sessions where students assemble circuits, sensors, motors and microcontroller boards themselves.</p>
-            </div>
-            <div class="card reveal d1 tilt-card">
-                <div class="icon-wrap"><svg class="icon"><use href="#i-robot"></use></svg></div>
-                <h3>1-on-1 Mentor Support</h3>
-                <p>Dedicated doubt sessions, progress tracking and personal mentorship for every enrolled student — school to college level.</p>
-            </div>
-            <div class="card reveal d2 tilt-card">
-                <div class="icon-wrap"><svg class="icon"><use href="#i-file"></use></svg></div>
-                <h3>Final Year Project Suite</h3>
-                <p>Complete code, circuit diagrams, connection guides, documentation, PPT and live explanation for viva preparation.</p>
-            </div>
-            <div class="card reveal tilt-card">
-                <div class="icon-wrap"><svg class="icon"><use href="#i-book"></use></svg></div>
-                <h3>STEAM Learning Books</h3>
-                <p>Our own illustrated workbooks &amp; activity guides designed for the Indian curriculum — from Class 1 basics to advanced robotics.</p>
-            </div>
-            <div class="card reveal d1 tilt-card">
-                <div class="icon-wrap"><svg class="icon"><use href="#i-trophy"></use></svg></div>
-                <h3>Competition Prep</h3>
-                <p>Training for robotics olympiads, science fairs, hackathons and national-level innovation challenges.</p>
-            </div>
-            <div class="card reveal d2 tilt-card">
-                <div class="icon-wrap"><svg class="icon"><use href="#i-briefcase"></use></svg></div>
-                <h3>Placement &amp; Internship</h3>
-                <p>Resume building, mock interviews and internship referrals for BTech / BCA / MCA students in core tech domains.</p>
-            </div>
+            <div class="card reveal tilt-card"><div class="icon-wrap"><svg class="icon"><use href="#i-cog"></use></svg></div><h3>Hands-On STEAM Labs</h3><p>Live virtual + offline lab sessions where students assemble circuits, sensors, motors and microcontroller boards themselves.</p></div>
+            <div class="card reveal d1 tilt-card"><div class="icon-wrap"><svg class="icon"><use href="#i-robot"></use></svg></div><h3>1-on-1 Mentor Support</h3><p>Dedicated doubt sessions, progress tracking and personal mentorship for every enrolled student — school to college level.</p></div>
+            <div class="card reveal d2 tilt-card"><div class="icon-wrap"><svg class="icon"><use href="#i-file"></use></svg></div><h3>Final Year Project Suite</h3><p>Complete code, circuit diagrams, connection guides, documentation, PPT and live explanation for viva preparation.</p></div>
+            <div class="card reveal tilt-card"><div class="icon-wrap"><svg class="icon"><use href="#i-book"></use></svg></div><h3>STEAM Learning Books</h3><p>Our own illustrated workbooks &amp; activity guides designed for the Indian curriculum — from Class 1 basics to advanced robotics.</p></div>
+            <div class="card reveal d1 tilt-card"><div class="icon-wrap"><svg class="icon"><use href="#i-trophy"></use></svg></div><h3>Competition Prep</h3><p>Training for robotics olympiads, science fairs, hackathons and national-level innovation challenges.</p></div>
+            <div class="card reveal d2 tilt-card"><div class="icon-wrap"><svg class="icon"><use href="#i-briefcase"></use></svg></div><h3>Placement &amp; Internship</h3><p>Resume building, mock interviews and internship referrals for BTech / BCA / MCA students in core tech domains.</p></div>
         </div>
     </div>
 </section>
@@ -719,34 +750,10 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
             <p class="section-sub reveal d2">Everything you need to submit, demo and defend your project confidently.</p>
         </div>
         <div class="included-grid">
-            <div class="included-card reveal tilt-card">
-                <div class="included-icon ii-1"><svg class="icon"><use href="#i-code"></use></svg></div>
-                <span class="included-num">01</span>
-                <h3>Complete Source Code</h3>
-                <p>Clean, commented code with setup instructions.</p>
-                <div class="included-glow"></div>
-            </div>
-            <div class="included-card reveal d1 tilt-card">
-                <div class="included-icon ii-2"><svg class="icon"><use href="#i-chip"></use></svg></div>
-                <span class="included-num">02</span>
-                <h3>Connections &amp; Wiring</h3>
-                <p>Circuit diagrams and pin-to-pin connection guide.</p>
-                <div class="included-glow"></div>
-            </div>
-            <div class="included-card reveal d2 tilt-card">
-                <div class="included-icon ii-3"><svg class="icon"><use href="#i-video"></use></svg></div>
-                <span class="included-num">03</span>
-                <h3>Live Explanation</h3>
-                <p>1-on-1 session explaining every module &amp; line.</p>
-                <div class="included-glow"></div>
-            </div>
-            <div class="included-card reveal d3 tilt-card">
-                <div class="included-icon ii-4"><svg class="icon"><use href="#i-file"></use></svg></div>
-                <span class="included-num">04</span>
-                <h3>Report + PPT</h3>
-                <p>Ready-to-submit documentation and presentation.</p>
-                <div class="included-glow"></div>
-            </div>
+            <div class="included-card reveal tilt-card"><div class="included-icon ii-1"><svg class="icon"><use href="#i-code"></use></svg></div><span class="included-num">01</span><h3>Complete Source Code</h3><p>Clean, commented code with setup instructions.</p><div class="included-glow"></div></div>
+            <div class="included-card reveal d1 tilt-card"><div class="included-icon ii-2"><svg class="icon"><use href="#i-chip"></use></svg></div><span class="included-num">02</span><h3>Connections &amp; Wiring</h3><p>Circuit diagrams and pin-to-pin connection guide.</p><div class="included-glow"></div></div>
+            <div class="included-card reveal d2 tilt-card"><div class="included-icon ii-3"><svg class="icon"><use href="#i-video"></use></svg></div><span class="included-num">03</span><h3>Live Explanation</h3><p>1-on-1 session explaining every module &amp; line.</p><div class="included-glow"></div></div>
+            <div class="included-card reveal d3 tilt-card"><div class="included-icon ii-4"><svg class="icon"><use href="#i-file"></use></svg></div><span class="included-num">04</span><h3>Report + PPT</h3><p>Ready-to-submit documentation and presentation.</p><div class="included-glow"></div></div>
         </div>
     </div>
 </section>
@@ -760,47 +767,17 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
             <p class="section-sub reveal d2">Structured learning paths designed for school students and college students — each with practical kits, projects and certification.</p>
         </div>
         <div class="grid-3">
-            <div class="card program-card reveal tilt-card">
-                <span class="tag">Class 1–5</span>
-                <h3>Junior Robotics &amp; STEAM</h3>
-                <p>Playful introduction to science, simple machines, block coding and creative building.</p>
-                <ul><li>LEGO-style mechanical builds</li><li>Scratch Jr. block coding</li><li>Paper circuits &amp; magnets</li><li>Art + Science fusion activities</li></ul>
-            </div>
-            <div class="card program-card reveal d1 tilt-card">
-                <span class="tag">Class 6–8</span>
-                <h3>Robotics Foundation</h3>
-                <p>Move from blocks to real circuits — sensors, motors and beginner microcontroller programming.</p>
-                <ul><li>Arduino Uno basics</li><li>Scratch + Arduino combo</li><li>Sensor &amp; motor interfacing</li><li>Mini robot car project</li></ul>
-            </div>
-            <div class="card program-card reveal d2 tilt-card">
-                <span class="tag">Class 9–12</span>
-                <h3>Advanced Robotics &amp; IoT</h3>
-                <p>Engineering-level projects with Python, IoT dashboards and AI fundamentals.</p>
-                <ul><li>Python programming</li><li>IoT with ESP32 / NodeMCU</li><li>AI &amp; Computer Vision intro</li><li>Science fair project support</li></ul>
-            </div>
-            <div class="card program-card reveal tilt-card">
-                <span class="tag">B.Tech</span>
-                <h3>BTech Final Year Projects</h3>
-                <p>Industry-grade major projects across Embedded, IoT, AI/ML and Robotics domains.</p>
-                <ul><li>Complete source code</li><li>Circuit diagram &amp; connections</li><li>Live 1-on-1 explanation</li><li>Report, PPT &amp; viva prep</li></ul>
-            </div>
-            <div class="card program-card reveal d1 tilt-card">
-                <span class="tag">BCA</span>
-                <h3>BCA Project Program</h3>
-                <p>Software-focused projects in web, mobile and database technologies with full documentation.</p>
-                <ul><li>Web / App development projects</li><li>Database design &amp; ER diagrams</li><li>Source code + setup guide</li><li>Live walkthrough session</li></ul>
-            </div>
-            <div class="card program-card reveal d2 tilt-card">
-                <span class="tag">MCA</span>
-                <h3>MCA Advanced Projects</h3>
-                <p>AI/ML, full-stack and data-driven final year projects with research-grade documentation.</p>
-                <ul><li>AI / ML model projects</li><li>Full-stack web applications</li><li>Research paper guidance</li><li>Deployment &amp; demo support</li></ul>
-            </div>
+            <div class="card program-card reveal tilt-card"><span class="tag">Class 1–5</span><h3>Junior Robotics &amp; STEAM</h3><p>Playful introduction to science, simple machines, block coding and creative building.</p><ul><li>LEGO-style mechanical builds</li><li>Scratch Jr. block coding</li><li>Paper circuits &amp; magnets</li><li>Art + Science fusion activities</li></ul></div>
+            <div class="card program-card reveal d1 tilt-card"><span class="tag">Class 6–8</span><h3>Robotics Foundation</h3><p>Move from blocks to real circuits — sensors, motors and beginner microcontroller programming.</p><ul><li>Arduino Uno basics</li><li>Scratch + Arduino combo</li><li>Sensor &amp; motor interfacing</li><li>Mini robot car project</li></ul></div>
+            <div class="card program-card reveal d2 tilt-card"><span class="tag">Class 9–12</span><h3>Advanced Robotics &amp; IoT</h3><p>Engineering-level projects with Python, IoT dashboards and AI fundamentals.</p><ul><li>Python programming</li><li>IoT with ESP32 / NodeMCU</li><li>AI &amp; Computer Vision intro</li><li>Science fair project support</li></ul></div>
+            <div class="card program-card reveal tilt-card"><span class="tag">B.Tech</span><h3>BTech Final Year Projects</h3><p>Industry-grade major projects across Embedded, IoT, AI/ML and Robotics domains.</p><ul><li>Complete source code</li><li>Circuit diagram &amp; connections</li><li>Live 1-on-1 explanation</li><li>Report, PPT &amp; viva prep</li></ul></div>
+            <div class="card program-card reveal d1 tilt-card"><span class="tag">BCA</span><h3>BCA Project Program</h3><p>Software-focused projects in web, mobile and database technologies with full documentation.</p><ul><li>Web / App development projects</li><li>Database design &amp; ER diagrams</li><li>Source code + setup guide</li><li>Live walkthrough session</li></ul></div>
+            <div class="card program-card reveal d2 tilt-card"><span class="tag">MCA</span><h3>MCA Advanced Projects</h3><p>AI/ML, full-stack and data-driven final year projects with research-grade documentation.</p><ul><li>AI / ML model projects</li><li>Full-stack web applications</li><li>Research paper guidance</li><li>Deployment &amp; demo support</li></ul></div>
         </div>
     </div>
 </section>
 
-<!-- KITS -->
+<!-- KITS WITH IMAGES -->
 <section id="kits">
     <div class="container">
         <div class="center" style="margin-bottom:50px">
@@ -808,39 +785,110 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
             <h2 class="section-title reveal d1">Kits That Come With <span class="grad-txt shimmer">Everything You Need</span></h2>
             <p class="section-sub reveal d2">Each kit includes hardware components, illustrated manuals, video tutorials and lifetime mentor support.</p>
         </div>
-        <div class="grid-3">
-            <div class="kit-card reveal tilt-card">
-                <div class="kit-visual"><span class="kit-emoji">💻</span></div>
-                <h3>Programming Kit</h3>
-                <p>Perfect for beginners who want to learn coding from scratch — block-based to Python and Arduino IDE.</p>
-                <ul><li>Arduino Uno R3 + USB cable</li><li>Breadboard + jumper wires + LEDs</li><li>Resistors, buttons &amp; buzzers</li><li>Illustrated coding workbook</li><li>Video tutorials + mentor support</li></ul>
-                <div class="kit-price-row">
-                    <div class="kit-price">₹<span>1,499</span><small>₹2,499</small></div>
-                    <a href="#contact" class="btn btn-grad btn-sm">Order Now</a>
+
+        <div class="kits-wrapper">
+            <!-- ESP32 KIT -->
+            <div class="kit-showcase reveal">
+                <div class="kit-image-side">
+                    <div class="kit-image-wrapper">
+                        <div class="kit-image-glow"></div>
+                        <img src="esp32-kit.png" alt="ESP32 IoT Starter Kit" class="kit-image" loading="lazy">
+                        <div class="kit-float-badge badge-cyan"><span>📡</span> IoT Ready</div>
+                        <div class="kit-float-badge badge-violet"><span>⚡</span> Wi-Fi + BT</div>
+                        <div class="kit-float-badge badge-pink"><span>🔧</span> 17 Components</div>
+                    </div>
+                </div>
+
+                <div class="kit-content-side">
+                    <span class="kit-badge-tag">Best Seller</span>
+                    <h3>ESP32 IoT Starter Kit</h3>
+                    <p>Perfect for beginners to learn IoT, Wi-Fi and Bluetooth projects with ESP32. Build 12+ real-world projects including Smart Home, Weather Station, Motion Detection and more.</p>
+
+                    <div class="kit-highlights-grid">
+                        <div class="kit-highlight-item"><span class="highlight-icon">📦</span><span class="highlight-text">17 Components</span></div>
+                        <div class="kit-highlight-item"><span class="highlight-icon">📖</span><span class="highlight-text">12+ Projects Guide</span></div>
+                        <div class="kit-highlight-item"><span class="highlight-icon">📶</span><span class="highlight-text">Wi-Fi + Bluetooth</span></div>
+                        <div class="kit-highlight-item"><span class="highlight-icon">🎯</span><span class="highlight-text">Beginner Friendly</span></div>
+                    </div>
+
+                    <div class="kit-components-inline">
+                        <h4>What's Inside the Box</h4>
+                        <div class="components-inline-grid">
+                            <div class="component-pill"><span class="comp-num">01</span>ESP32 DevKit Board</div>
+                            <div class="component-pill"><span class="comp-num">02</span>830-Point Breadboard</div>
+                            <div class="component-pill"><span class="comp-num">03</span>USB Cable</div>
+                            <div class="component-pill"><span class="comp-num">04</span>0.96" OLED Display</div>
+                            <div class="component-pill"><span class="comp-num">05</span>DHT22 Sensor</div>
+                            <div class="component-pill"><span class="comp-num">06</span>Ultrasonic Sensor</div>
+                            <div class="component-pill"><span class="comp-num">07</span>PIR Motion Sensor</div>
+                            <div class="component-pill"><span class="comp-num">08</span>MQ-2 Gas Sensor</div>
+                            <div class="component-pill"><span class="comp-num">09</span>LDR Light Sensor</div>
+                            <div class="component-pill"><span class="comp-num">10</span>Soil Moisture Sensor</div>
+                            <div class="component-pill"><span class="comp-num">11</span>SG90 Servo Motor</div>
+                            <div class="component-pill"><span class="comp-num">12</span>2-Ch Relay Module</div>
+                            <div class="component-pill"><span class="comp-num">13</span>Buzzer + LEDs + Buttons</div>
+                        </div>
+                    </div>
+
+                    <div class="kit-detail-actions">
+                        <a href="#contact" class="btn btn-grad">Order ESP32 Kit</a>
+                        <a href="#contact" class="btn btn-ghost">Request Demo</a>
+                    </div>
                 </div>
             </div>
-            <div class="kit-card reveal d1 tilt-card">
-                <div class="kit-visual"><span class="kit-emoji">⚡</span></div>
-                <h3>Electronics Kit</h3>
-                <p>Learn the fundamentals of electronics — circuits, sensors, motors and real-world prototyping.</p>
-                <ul><li>Breadboard, wires &amp; multimeter</li><li>LEDs, capacitors, transistors &amp; diodes</li><li>DC motor + servo + driver module</li><li>Assorted sensors (IR, LDR, temp)</li><li>Circuit diagram handbook</li></ul>
-                <div class="kit-price-row">
-                    <div class="kit-price">₹<span>1,999</span><small>₹3,199</small></div>
-                    <a href="#contact" class="btn btn-grad btn-sm">Order Now</a>
+
+            <!-- ARDUINO KIT -->
+            <div class="kit-showcase kit-showcase-reverse reveal d1">
+                <div class="kit-image-side">
+                    <div class="kit-image-wrapper kit-image-wrapper-alt">
+                        <div class="kit-image-glow glow-violet"></div>
+                        <img src="arduino-kit.png" alt="Arduino IoT Kit" class="kit-image" loading="lazy">
+                        <div class="kit-float-badge badge-violet"><span>💻</span> Beginner</div>
+                        <div class="kit-float-badge badge-cyan"><span>🇮🇳</span> Made in India</div>
+                        <div class="kit-float-badge badge-pink"><span>🔧</span> 13 Components</div>
+                    </div>
                 </div>
-            </div>
-            <div class="kit-card reveal d2 tilt-card">
-                <div class="kit-visual"><span class="kit-emoji">📡</span></div>
-                <h3>IoT Kit</h3>
-                <p>Build smart connected devices — monitor data from anywhere and control hardware via the cloud.</p>
-                <ul><li>ESP32 / NodeMCU board</li><li>DHT11, ultrasonic, gas &amp; PIR sensors</li><li>Relay module + OLED display</li><li>Cloud dashboard setup guide</li><li>Mobile app control tutorial</li></ul>
-                <div class="kit-price-row">
-                    <div class="kit-price">₹<span>2,999</span><small>₹4,499</small></div>
-                    <a href="#contact" class="btn btn-grad btn-sm">Order Now</a>
+
+                <div class="kit-content-side">
+                    <span class="kit-badge-tag kit-tag-alt">Popular</span>
+                    <h3>Arduino IoT Kit</h3>
+                    <p>Learn electronics and programming fundamentals with Arduino Uno R3. Ideal for students starting their robotics and IoT journey. Build 12+ hands-on projects.</p>
+
+                    <div class="kit-highlights-grid">
+                        <div class="kit-highlight-item"><span class="highlight-icon">📦</span><span class="highlight-text">13 Components</span></div>
+                        <div class="kit-highlight-item"><span class="highlight-icon">📖</span><span class="highlight-text">12+ Projects Guide</span></div>
+                        <div class="kit-highlight-item"><span class="highlight-icon">🎯</span><span class="highlight-text">Perfect for Beginners</span></div>
+                        <div class="kit-highlight-item"><span class="highlight-icon">🇮🇳</span><span class="highlight-text">Made in India</span></div>
+                    </div>
+
+                    <div class="kit-components-inline">
+                        <h4>What's Inside the Box</h4>
+                        <div class="components-inline-grid">
+                            <div class="component-pill"><span class="comp-num">01</span>Arduino Uno R3</div>
+                            <div class="component-pill"><span class="comp-num">02</span>830-Point Breadboard</div>
+                            <div class="component-pill"><span class="comp-num">03</span>Jumper Wires Set</div>
+                            <div class="component-pill"><span class="comp-num">04</span>USB Cable (Type-B)</div>
+                            <div class="component-pill"><span class="comp-num">05</span>DHT11 Sensor</div>
+                            <div class="component-pill"><span class="comp-num">06</span>Ultrasonic Sensor</div>
+                            <div class="component-pill"><span class="comp-num">07</span>PIR Motion Sensor</div>
+                            <div class="component-pill"><span class="comp-num">08</span>MQ-2 Gas Sensor</div>
+                            <div class="component-pill"><span class="comp-num">09</span>LDR Light Sensor</div>
+                            <div class="component-pill"><span class="comp-num">10</span>Soil Moisture Sensor</div>
+                            <div class="component-pill"><span class="comp-num">11</span>SG90 Servo Motor</div>
+                            <div class="component-pill"><span class="comp-num">12</span>2-Ch Relay Module</div>
+                            <div class="component-pill"><span class="comp-num">13</span>Buzzer + LEDs + Buttons</div>
+                        </div>
+                    </div>
+
+                    <div class="kit-detail-actions">
+                        <a href="#contact" class="btn btn-grad">Order Arduino Kit</a>
+                        <a href="#contact" class="btn btn-ghost">Request Demo</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <p class="center" style="margin-top:36px; color:var(--muted); font-size:.9rem;">
+
+        <p class="center kit-footer-note">
             📦 Free shipping across India · 🎓 Certificate on completion · 📞 Lifetime mentor support
         </p>
     </div>
@@ -849,34 +897,65 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
 <!-- STEM LAB -->
 <section id="stemlab">
     <div class="container">
-        <div class="stem-lab reveal">
-            <div class="stem-grid">
-                <div>
-                    <span class="stem-badge"><svg class="icon"><use href="#i-school"></use></svg> For Schools &amp; Institutes</span>
-                    <h2>We Provide <span class="grad-txt shimmer">STEM Labs</span> in Schools</h2>
-                    <p>Give your students a world-class STEM learning environment. We set up a complete, ready-to-use Robotics, IoT &amp; AI lab at your school — with hardware, curriculum, teacher training and continuous support.</p>
-                    <div class="stem-features">
-                        <div class="stem-feature"><span class="check">✓</span><span>Complete Hardware Setup</span></div>
-                        <div class="stem-feature"><span class="check">✓</span><span>Robotics + IoT + AI Kits</span></div>
-                        <div class="stem-feature"><span class="check">✓</span><span>Class-wise Curriculum</span></div>
-                        <div class="stem-feature"><span class="check">✓</span><span>Teacher Training Program</span></div>
-                        <div class="stem-feature"><span class="check">✓</span><span>Yearly Maintenance &amp; Support</span></div>
-                        <div class="stem-feature"><span class="check">✓</span><span>Student Project Guidance</span></div>
-                    </div>
-                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                        <a href="#contact" class="btn btn-grad"><svg class="icon"><use href="#i-flask"></use></svg> Request a Free Demo</a>
-                        <a href="#contact" class="btn btn-ghost">Download Brochure</a>
-                    </div>
+        <div class="center" style="margin-bottom:50px">
+            <span class="eyebrow reveal">For Schools &amp; Institutes</span>
+            <h2 class="section-title reveal d1">We Provide <span class="grad-txt shimmer">STEM Labs</span> in Schools</h2>
+            <p class="section-sub reveal d2">Choose the perfect STEM lab package for your school — with complete hardware, curriculum, teacher training and continuous support.</p>
+        </div>
+
+        <div class="stem-packages">
+            <!-- BASIC LAB -->
+            <div class="stem-package-card reveal tilt-card">
+                <div class="stem-package-badge">Most Affordable</div>
+                <div class="stem-package-icon sp-basic"><svg class="icon"><use href="#i-flask"></use></svg></div>
+                <h3>Basic STEM Lab</h3>
+                <p class="stem-package-desc">Perfect for schools starting their STEM journey. Complete kit with essential hardware and curriculum for Class 6–12.</p>
+                <div class="stem-package-price">
+                    <span class="price-currency">₹</span>
+                    <span class="price-amount">2,50,000</span>
+                    <span class="price-suffix">/-</span>
                 </div>
-                <div class="stem-price-box">
-                    <div class="old-price">₹3,50,000</div>
-                    <div class="new-price">₹2,00,000</div>
-                    <div class="price-label">One-Time Setup Cost</div>
-                    <a href="#contact" class="btn btn-grad btn-block"><svg class="icon"><use href="#i-bolt"></use></svg> Book STEM Lab</a>
-                    <p class="includes"><b>Includes:</b> Hardware + Kits + Software + Curriculum + Teacher Training + 1-Year Support</p>
+                <p class="price-note">One-time setup cost</p>
+                <ul class="stem-package-features">
+                    <li><span class="check">✓</span> Arduino IoT Kits (10 sets)</li>
+                    <li><span class="check">✓</span> Basic Sensors &amp; Components</li>
+                    <li><span class="check">✓</span> Class-wise Curriculum Books</li>
+                    <li><span class="check">✓</span> Teacher Training Program</li>
+                    <li><span class="check">✓</span> 1-Year Maintenance &amp; Support</li>
+                    <li><span class="check">✓</span> Student Project Guidance</li>
+                </ul>
+                <a href="#contact" class="btn btn-grad btn-block"><svg class="icon"><use href="#i-bolt"></use></svg> Book Basic Lab</a>
+            </div>
+
+            <!-- PREMIUM LAB -->
+            <div class="stem-package-card stem-package-premium reveal d1 tilt-card">
+                <div class="stem-package-badge premium-badge">⭐ Best Value</div>
+                <div class="stem-package-icon sp-premium"><svg class="icon"><use href="#i-school"></use></svg></div>
+                <h3>Premium STEM Lab</h3>
+                <p class="stem-package-desc">Advanced lab with IoT, AI and Robotics kits. Everything you need to make your school a STEM leader.</p>
+                <div class="stem-package-price">
+                    <span class="price-currency">₹</span>
+                    <span class="price-amount">5,00,000</span>
+                    <span class="price-suffix">/-</span>
                 </div>
+                <p class="price-note">One-time setup cost</p>
+                <ul class="stem-package-features">
+                    <li><span class="check">✓</span> Arduino + ESP32 IoT Kits (20 sets)</li>
+                    <li><span class="check">✓</span> Advanced Sensors + AI Modules</li>
+                    <li><span class="check">✓</span> Robotics Kits + 3D Printer Ready</li>
+                    <li><span class="check">✓</span> Complete Class-wise Curriculum</li>
+                    <li><span class="check">✓</span> Teacher Training + Certifications</li>
+                    <li><span class="check">✓</span> 2-Year Maintenance &amp; Support</li>
+                    <li><span class="check">✓</span> Competition Prep + Mentorship</li>
+                    <li><span class="check">✓</span> Dedicated Project Coordinator</li>
+                </ul>
+                <a href="#contact" class="btn btn-grad btn-block"><svg class="icon"><use href="#i-bolt"></use></svg> Book Premium Lab</a>
             </div>
         </div>
+
+        <p class="center kit-footer-note" style="margin-top:40px;">
+            🏫 Custom packages available for large schools &amp; institutes · 📞 Call +91 96168 81048
+        </p>
     </div>
 </section>
 
@@ -926,31 +1005,14 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
             <h2 class="section-title reveal d1">What Our <span class="grad-txt shimmer">Students Say</span></h2>
         </div>
         <div class="grid-3">
-            <div class="testimonial-card reveal tilt-card">
-                <div class="stars">★★★★★</div>
-                <blockquote>"Mera final year project bilkul ready tha — code, connections, report sab kuch. Live explanation session ne viva me bahut help kiya."</blockquote>
-                <div class="testimonial-author"><div class="avatar">AR</div><div><b>Aditya Raj</b><span>B.Tech ECE, Final Year</span></div></div>
-            </div>
-            <div class="testimonial-card reveal d1 tilt-card">
-                <div class="stars">★★★★★</div>
-                <blockquote>"Mere bete ne Class 7 se robotics start kiya. Ab wo khud Arduino se projects banata hai. Teachers bahut supportive hain."</blockquote>
-                <div class="testimonial-author"><div class="avatar">SM</div><div><b>Sunita Mehta</b><span>Parent, Class 7 Student</span></div></div>
-            </div>
-            <div class="testimonial-card reveal d2 tilt-card">
-                <div class="stars">★★★★★</div>
-                <blockquote>"MCA me AI/ML project chahiye tha. Yahan se pura source code, dataset aur documentation mila. Deployment tak support kiya."</blockquote>
-                <div class="testimonial-author"><div class="avatar">PK</div><div><b>Priya Kulkarni</b><span>MCA, Pune</span></div></div>
-            </div>
+            <div class="testimonial-card reveal tilt-card"><div class="stars">★★★★★</div><blockquote>"Mera final year project bilkul ready tha — code, connections, report sab kuch. Live explanation session ne viva me bahut help kiya."</blockquote><div class="testimonial-author"><div class="avatar">AR</div><div><b>Aditya Raj</b><span>B.Tech ECE, Final Year</span></div></div></div>
+            <div class="testimonial-card reveal d1 tilt-card"><div class="stars">★★★★★</div><blockquote>"Mere bete ne Class 7 se robotics start kiya. Ab wo khud Arduino se projects banata hai. Teachers bahut supportive hain."</blockquote><div class="testimonial-author"><div class="avatar">SM</div><div><b>Sunita Mehta</b><span>Parent, Class 7 Student</span></div></div></div>
+            <div class="testimonial-card reveal d2 tilt-card"><div class="stars">★★★★★</div><blockquote>"MCA me AI/ML project chahiye tha. Yahan se pura source code, dataset aur documentation mila. Deployment tak support kiya."</blockquote><div class="testimonial-author"><div class="avatar">PK</div><div><b>Priya Kulkarni</b><span>MCA, Pune</span></div></div></div>
         </div>
     </div>
 </section>
 
-<!-- ============================================================
-     CONTACT FORM — NATIVE FORMSPREE SUBMISSION
-     ⚠️ action="..." me apni Formspree URL paste karo
-     Format: https://formspree.io/f/YOUR_FORM_ID
-     Example: https://formspree.io/f/xbjkyqwe
-     ============================================================ -->
+<!-- CONTACT -->
 <section id="contact">
     <div class="container">
         <div class="center" style="margin-bottom:50px">
@@ -975,33 +1037,15 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
                     </div>
                 </div>
             </div>
-
-            <!-- 🔴 FORMSPREE FORM — apni ID paste karo neeche action me -->
-            <form class="form-card reveal d1"
-                  id="contactForm"
-                  action="https://formspree.io/f/xgavywjr"
-                  method="POST"
-                  novalidate>
-
+            <form class="form-card reveal d1" id="contactForm" action="https://formspree.io/f/xgavywjr" method="POST" novalidate>
                 <input type="hidden" name="_subject" value="New Aethelbotics Enquiry">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://aethelbotics.com/thank-you">
-
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="10-digit number" required>
-                    </div>
+                    <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" placeholder="Your name" required></div>
+                    <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" placeholder="10-digit number" required></div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="you@email.com" required>
-                    </div>
+                    <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="you@email.com" required></div>
                     <div class="form-group">
                         <label for="program">Interested In</label>
                         <select id="program" name="program" required>
@@ -1012,10 +1056,10 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
                             <option>B.Tech Final Year Project</option>
                             <option>BCA Project Program</option>
                             <option>MCA Advanced Projects</option>
-                            <option>Programming Kit</option>
-                            <option>Electronics Kit</option>
-                            <option>IoT Kit</option>
-                            <option>STEM Lab for School (₹2 Lakhs)</option>
+                            <option>ESP32 IoT Starter Kit</option>
+                            <option>Arduino IoT Kit</option>
+                            <option>Basic STEM Lab (₹2.5 Lakhs)</option>
+                            <option>Premium STEM Lab (₹5 Lakhs)</option>
                         </select>
                     </div>
                 </div>
@@ -1094,20 +1138,15 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
 <div class="chat-window" id="chatWindow">
     <div class="chat-head">
         <div class="bot-avatar"><svg class="icon"><use href="#i-robot"></use></svg></div>
-        <div class="bot-info">
-            <b>Aethe Bot</b>
-            <span>Online · Ready to help</span>
-        </div>
-        <div class="chat-close" id="chatClose" role="button" aria-label="Close chat">
-            <svg class="icon"><use href="#i-close"></use></svg>
-        </div>
+        <div class="bot-info"><b>Aethe Bot</b><span>Online · Ready to help</span></div>
+        <div class="chat-close" id="chatClose" role="button" aria-label="Close chat"><svg class="icon"><use href="#i-close"></use></svg></div>
     </div>
     <div class="chat-body" id="chatBody"></div>
     <div class="chat-quick" id="chatQuick">
         <button data-q="Tell me about kits">Kits</button>
-        <button data-q="STEM Lab for school">STEM Lab</button>
-        <button data-q="Final year projects">Projects</button>
-        <button data-q="Book free demo">Book Demo</button>
+        <button data-q="ESP32 kit details">ESP32 Kit</button>
+        <button data-q="Arduino kit details">Arduino Kit</button>
+        <button data-q="STEM Lab pricing">STEM Lab</button>
     </div>
     <div class="chat-foot">
         <input type="text" id="chatInput" placeholder="Type your message..." aria-label="Chat message">
@@ -1135,10 +1174,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
                 </span>
             </div>
             <div class="login-options">
-                <label>
-                    <input type="checkbox" id="rememberMe">
-                    Remember me
-                </label>
+                <label><input type="checkbox" id="rememberMe"> Remember me</label>
                 <a href="#" onclick="event.preventDefault();">Forgot password?</a>
             </div>
             <button type="submit" class="btn btn-grad btn-block">
@@ -1147,10 +1183,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
             </button>
             <p class="login-attempts" id="loginAttempts"></p>
         </form>
-        <p class="login-secure">
-            <svg class="icon"><use href="#i-lock"></use></svg>
-            Protected with 256-bit encryption
-        </p>
+        <p class="login-secure"><svg class="icon"><use href="#i-lock"></use></svg> Protected with 256-bit encryption</p>
     </div>
 </div>
 
@@ -1171,26 +1204,12 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
                 <button class="admin-dash-close" id="dashClose" aria-label="Close"><svg class="icon"><use href="#i-close"></use></svg></button>
             </div>
         </header>
-
         <div class="admin-stats-row">
-            <div class="admin-stat">
-                <div class="admin-stat-icon si-1"><svg class="icon"><use href="#i-mail"></use></svg></div>
-                <div><b id="statTotal">0</b><span>Total Enquiries</span></div>
-            </div>
-            <div class="admin-stat">
-                <div class="admin-stat-icon si-2"><svg class="icon"><use href="#i-sparkles"></use></svg></div>
-                <div><b id="statNew">0</b><span>New / Unread</span></div>
-            </div>
-            <div class="admin-stat">
-                <div class="admin-stat-icon si-3"><svg class="icon"><use href="#i-check"></use></svg></div>
-                <div><b id="statContacted">0</b><span>Contacted</span></div>
-            </div>
-            <div class="admin-stat">
-                <div class="admin-stat-icon si-4"><svg class="icon"><use href="#i-chart"></use></svg></div>
-                <div><b id="statToday">0</b><span>Today</span></div>
-            </div>
+            <div class="admin-stat"><div class="admin-stat-icon si-1"><svg class="icon"><use href="#i-mail"></use></svg></div><div><b id="statTotal">0</b><span>Total Enquiries</span></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon si-2"><svg class="icon"><use href="#i-sparkles"></use></svg></div><div><b id="statNew">0</b><span>New / Unread</span></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon si-3"><svg class="icon"><use href="#i-check"></use></svg></div><div><b id="statContacted">0</b><span>Contacted</span></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon si-4"><svg class="icon"><use href="#i-chart"></use></svg></div><div><b id="statToday">0</b><span>Today</span></div></div>
         </div>
-
         <div class="admin-toolbar">
             <div class="admin-search">
                 <svg class="icon"><use href="#i-search"></use></svg>
@@ -1203,21 +1222,9 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
                 <option value="closed">Closed</option>
             </select>
         </div>
-
         <div class="admin-table-wrap">
             <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Contact</th>
-                        <th>Program</th>
-                        <th>Message</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>#</th><th>Name</th><th>Contact</th><th>Program</th><th>Message</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
                 <tbody id="adminTableBody"></tbody>
             </table>
             <div class="admin-empty" id="adminEmpty">
@@ -1232,10 +1239,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: 
 <div class="toast-wrap" id="toastWrap"></div>
 
 <script>
-/* ============================================================
-   AETHELBOTICS — JAVASCRIPT
-   ============================================================ */
-
+/* AETHELBOTICS — JAVASCRIPT */
 const ADMIN_USERNAME = 'Atul';
 const ADMIN_PASSWORD = 'atul789@';
 const STORAGE_KEY = 'aethelbotics_enquiries';
@@ -1261,53 +1265,31 @@ function escapeHtml(str = '') {
     return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 function formatDate(iso) {
-    try {
-        return new Date(iso).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-    } catch { return iso; }
+    try { return new Date(iso).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }); }
+    catch { return iso; }
 }
-function loadEnquiries() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch { return []; }
-}
+function loadEnquiries() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
 function saveEnquiries(list) { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
-function isToday(iso) {
-    const d = new Date(iso), n = new Date();
-    return d.toDateString() === n.toDateString();
-}
+function isToday(iso) { const d = new Date(iso), n = new Date(); return d.toDateString() === n.toDateString(); }
 
 /* SCROLL PROGRESS + CURSOR GLOW */
 (function initScrollProgressAndGlow() {
-    const bar  = $('#scrollProgress');
-    const glow = $('#cursorGlow');
-    if (bar) {
-        window.addEventListener('scroll', () => {
-            const h = document.documentElement.scrollHeight - window.innerHeight;
-            bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
-        }, { passive: true });
-    }
+    const bar = $('#scrollProgress'), glow = $('#cursorGlow');
+    if (bar) window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
+    }, { passive: true });
     if (glow && window.matchMedia('(pointer: fine)').matches) {
-        let gx = window.innerWidth / 2, gy = window.innerHeight / 2;
-        let tx = gx, ty = gy;
-        document.addEventListener('mousemove', (e) => {
-            tx = e.clientX; ty = e.clientY;
-            glow.style.opacity = '1';
-        });
+        let gx = window.innerWidth/2, gy = window.innerHeight/2, tx = gx, ty = gy;
+        document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; glow.style.opacity = '1'; });
         document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
-        (function loop() {
-            gx += (tx - gx) * 0.12;
-            gy += (ty - gy) * 0.12;
-            glow.style.left = gx + 'px';
-            glow.style.top  = gy + 'px';
-            requestAnimationFrame(loop);
-        })();
-    } else if (glow) { glow.style.display = 'none'; }
+        (function loop() { gx += (tx-gx)*0.12; gy += (ty-gy)*0.12; glow.style.left = gx+'px'; glow.style.top = gy+'px'; requestAnimationFrame(loop); })();
+    } else if (glow) glow.style.display = 'none';
 })();
 
 /* MOBILE MENU */
 (function initMobileMenu() {
-    const burger   = $('#burger');
-    const menu     = $('#menu');
-    const backdrop = $('#menuBackdrop');
+    const burger = $('#burger'), menu = $('#menu'), backdrop = $('#menuBackdrop');
     if (!burger || !menu) return;
     function toggle(open) {
         const isOpen = open ?? !menu.classList.contains('open');
@@ -1324,21 +1306,11 @@ function isToday(iso) {
 /* NAVBAR SCROLL + ACTIVE LINK */
 (function initNavbar() {
     const nav = $('#nav');
-    if (nav) {
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 40);
-        }, { passive: true });
-    }
-    const sections = $$('section[id]');
-    const navLinks = $$('.menu a');
+    if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+    const sections = $$('section[id]'), navLinks = $$('.menu a');
     if (!sections.length || !navLinks.length) return;
     const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                const id = e.target.id;
-                navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-            }
-        });
+        entries.forEach(e => { if (e.isIntersecting) { const id = e.target.id; navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id)); } });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => obs.observe(s));
 })();
@@ -1348,9 +1320,7 @@ function isToday(iso) {
     const els = $$('.reveal');
     if (!els.length) return;
     const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
-        });
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     els.forEach(el => obs.observe(el));
 })();
@@ -1360,20 +1330,11 @@ function isToday(iso) {
     const typedEl = $('#typed');
     if (!typedEl) return;
     const cursor = typedEl.querySelector('.cur');
-    const phrases = [
-        'Robotics for Class 1–12',
-        'Final Year Projects for BTech',
-        'IoT & AI for Young Innovators',
-        'STEM Labs for Schools @ ₹2 Lakhs',
-        'Programming · Electronics · IoT Kits'
-    ];
+    const phrases = ['Robotics for Class 1–12','Final Year Projects for BTech','IoT & AI for Young Innovators','STEM Labs for Schools @ ₹2 Lakhs','ESP32 & Arduino IoT Kits'];
     let pIdx = 0, cIdx = 0, deleting = false;
-    if (!typedEl.firstChild || typedEl.firstChild === cursor) {
-        typedEl.insertBefore(document.createTextNode(''), cursor);
-    }
+    if (!typedEl.firstChild || typedEl.firstChild === cursor) typedEl.insertBefore(document.createTextNode(''), cursor);
     function loop() {
-        const current = phrases[pIdx];
-        const textNode = typedEl.firstChild;
+        const current = phrases[pIdx], textNode = typedEl.firstChild;
         if (!deleting) {
             cIdx++;
             if (textNode) textNode.textContent = current.slice(0, cIdx);
@@ -1382,11 +1343,7 @@ function isToday(iso) {
         } else {
             cIdx--;
             if (textNode) textNode.textContent = current.slice(0, cIdx);
-            if (cIdx === 0) {
-                deleting = false;
-                pIdx = (pIdx + 1) % phrases.length;
-                setTimeout(loop, 300); return;
-            }
+            if (cIdx === 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; setTimeout(loop, 300); return; }
             setTimeout(loop, 25);
         }
     }
@@ -1400,9 +1357,7 @@ function isToday(iso) {
     function animate(el) {
         if (el.dataset.animated === 'true') return;
         el.dataset.animated = 'true';
-        const target = +el.dataset.count || 0;
-        const duration = 1800;
-        const start = performance.now();
+        const target = +el.dataset.count || 0, duration = 1800, start = performance.now();
         (function update(now) {
             const p = Math.min((now - start) / duration, 1);
             const eased = 1 - Math.pow(1 - p, 3);
@@ -1412,16 +1367,10 @@ function isToday(iso) {
     }
     if (!('IntersectionObserver' in window)) { counters.forEach(animate); return; }
     const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); }
-        });
+        entries.forEach(e => { if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); } });
     }, { threshold: 0.1 });
     counters.forEach(c => obs.observe(c));
-    setTimeout(() => {
-        counters.forEach(c => {
-            if (c.textContent === '0' || c.textContent === '') animate(c);
-        });
-    }, 2000);
+    setTimeout(() => counters.forEach(c => { if (c.textContent === '0' || c.textContent === '') animate(c); }), 2000);
 })();
 
 /* HERO CANVAS */
@@ -1433,52 +1382,26 @@ function isToday(iso) {
     const COUNT = 60, DIST = 130;
     function resize() {
         const rect = canvas.parentElement.getBoundingClientRect();
-        canvas.width  = rect.width  * devicePixelRatio;
+        canvas.width = rect.width * devicePixelRatio;
         canvas.height = rect.height * devicePixelRatio;
-        canvas.style.width  = rect.width  + 'px';
+        canvas.style.width = rect.width + 'px';
         canvas.style.height = rect.height + 'px';
         ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
     }
     function init() {
         particles = [];
-        const w = canvas.width / devicePixelRatio;
-        const h = canvas.height / devicePixelRatio;
-        for (let i = 0; i < COUNT; i++) {
-            particles.push({
-                x: Math.random() * w, y: Math.random() * h,
-                vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4,
-                r: Math.random() * 1.8 + .8
-            });
-        }
+        const w = canvas.width / devicePixelRatio, h = canvas.height / devicePixelRatio;
+        for (let i = 0; i < COUNT; i++) particles.push({ x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4, r: Math.random()*1.8+.8 });
     }
     function draw() {
-        const w = canvas.width / devicePixelRatio;
-        const h = canvas.height / devicePixelRatio;
+        const w = canvas.width / devicePixelRatio, h = canvas.height / devicePixelRatio;
         ctx.clearRect(0, 0, w, h);
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const d = Math.hypot(dx, dy);
-                if (d < DIST) {
-                    ctx.strokeStyle = `rgba(0,229,255,${(1 - d / DIST) * .18})`;
-                    ctx.lineWidth = .6;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
+        for (let i = 0; i < particles.length; i++) for (let j = i+1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+            const d = Math.hypot(dx, dy);
+            if (d < DIST) { ctx.strokeStyle = `rgba(0,229,255,${(1-d/DIST)*.18})`; ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke(); }
         }
-        particles.forEach(p => {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(168,85,247,.7)';
-            ctx.fill();
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < 0 || p.x > w) p.vx *= -1;
-            if (p.y < 0 || p.y > h) p.vy *= -1;
-        });
+        particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fillStyle = 'rgba(168,85,247,.7)'; ctx.fill(); p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1; });
         requestAnimationFrame(draw);
     }
     resize(); init(); draw();
@@ -1489,12 +1412,7 @@ function isToday(iso) {
 (function initMagneticButtons() {
     if (!window.matchMedia('(pointer: fine)').matches) return;
     $$('.btn-magnetic').forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const r = btn.getBoundingClientRect();
-            const x = e.clientX - r.left - r.width / 2;
-            const y = e.clientY - r.top  - r.height / 2;
-            btn.style.transform = `translate(${x * .15}px, ${y * .25}px)`;
-        });
+        btn.addEventListener('mousemove', (e) => { const r = btn.getBoundingClientRect(); const x = e.clientX - r.left - r.width/2; const y = e.clientY - r.top - r.height/2; btn.style.transform = `translate(${x*.15}px, ${y*.25}px)`; });
         btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
 })();
@@ -1503,15 +1421,12 @@ function isToday(iso) {
 (function initRipple() {
     $$('.btn').forEach(btn => {
         btn.addEventListener('click', function (e) {
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top  - size / 2;
+            const rect = this.getBoundingClientRect(), size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size/2, y = e.clientY - rect.top - size/2;
             const ripple = document.createElement('span');
             ripple.className = 'ripple';
             ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top  = y + 'px';
+            ripple.style.left = x + 'px'; ripple.style.top = y + 'px';
             this.appendChild(ripple);
             setTimeout(() => ripple.remove(), 650);
         });
@@ -1525,88 +1440,55 @@ function isToday(iso) {
     $$('.tilt-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const r = card.getBoundingClientRect();
-            const px = (e.clientX - r.left) / r.width;
-            const py = (e.clientY - r.top)  / r.height;
-            const rotY = (px - .5) * MAX * 2;
-            const rotX = (.5 - py) * MAX * 2;
+            const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+            const rotY = (px - .5) * MAX * 2, rotX = (.5 - py) * MAX * 2;
             card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px)`;
         });
         card.addEventListener('mouseleave', () => { card.style.transform = ''; });
     });
 })();
 
-/* CONTACT FORM — Native Formspree submission */
+/* CONTACT FORM */
 (function initContactForm() {
     const form = $('#contactForm');
     if (!form) return;
     const submitBtn = $('#submitBtn');
-
     form.addEventListener('submit', function (e) {
-        const name    = $('#name').value.trim();
-        const phone   = $('#phone').value.trim();
-        const email   = $('#email').value.trim();
-        const program = $('#program').value;
-        const message = $('#message').value.trim();
-
+        const name = $('#name').value.trim(), phone = $('#phone').value.trim(), email = $('#email').value.trim();
+        const program = $('#program').value, message = $('#message').value.trim();
         if (!name) { e.preventDefault(); toast('Please enter your name.', 'error'); $('#name').focus(); return; }
         if (!/^\d{10}$/.test(phone)) { e.preventDefault(); toast('Please enter a valid 10-digit phone number.', 'error'); $('#phone').focus(); return; }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { e.preventDefault(); toast('Please enter a valid email address.', 'error'); $('#email').focus(); return; }
         if (!program) { e.preventDefault(); toast('Please select a program.', 'error'); $('#program').focus(); return; }
-
         const actionUrl = form.getAttribute('action') || '';
-        if (!actionUrl || actionUrl.includes('YOUR_FORM_ID')) {
-            e.preventDefault();
-            toast('⚠️ Formspree URL not configured.', 'error');
-            console.error('❌ Formspree URL missing! Update action="..." in <form> tag.');
-            return;
-        }
-
-        const data = {
-            name, phone, email, program, message,
-            date: new Date().toISOString(),
-            status: 'new',
-            id: Date.now() + '-' + Math.random().toString(36).slice(2, 8)
-        };
-        const all = loadEnquiries();
-        all.unshift(data);
-        saveEnquiries(all);
+        if (!actionUrl || actionUrl.includes('YOUR_FORM_ID')) { e.preventDefault(); toast('⚠️ Formspree URL not configured.', 'error'); return; }
+        const data = { name, phone, email, program, message, date: new Date().toISOString(), status: 'new', id: Date.now() + '-' + Math.random().toString(36).slice(2, 8) };
+        const all = loadEnquiries(); all.unshift(data); saveEnquiries(all);
         if (typeof window.updateAdminBadge === 'function') window.updateAdminBadge();
-
         submitBtn?.classList.add('loading');
         toast('Sending your enquiry...', 'info');
     });
-
-    window.addEventListener('pageshow', () => {
-        submitBtn?.classList.remove('loading');
-    });
+    window.addEventListener('pageshow', () => submitBtn?.classList.remove('loading'));
 })();
 
 /* CHATBOT */
 (function initChatbot() {
-    const fab     = $('#chatFab');
-    const win     = $('#chatWindow');
-    const closeEl = $('#chatClose');
-    const body    = $('#chatBody');
-    const input   = $('#chatInput');
-    const sendBtn = $('#chatSend');
-    const quick   = $('#chatQuick');
-    const notif   = fab?.querySelector('.notif');
+    const fab = $('#chatFab'), win = $('#chatWindow'), closeEl = $('#chatClose');
+    const body = $('#chatBody'), input = $('#chatInput'), sendBtn = $('#chatSend'), quick = $('#chatQuick');
+    const notif = fab?.querySelector('.notif');
     if (!fab || !win || !body) return;
     let opened = false;
-
     const replies = [
-        { match: /kit|programming|electronics|iot kit/i, reply: "Aethelbotics me 3 kits hain 👇\n💻 Programming Kit — ₹1,499\n⚡ Electronics Kit — ₹1,999\n📡 IoT Kit — ₹2,999\n\nHar kit me hardware + manuals + video tutorials + lifetime mentor support." },
-        { match: /stem|lab|school|2 ?lakh|200000/i, reply: "Aethelbotics schools me complete STEM Labs setup karta hai — sirf ₹2,00,000 me! 🏫\n\nIncludes: Hardware + Robotics/IoT/AI Kits + Software + Curriculum + Teacher Training + 1-Year Support." },
-        { match: /project|final ?year|btech|mca|bca/i, reply: "Aethelbotics Final Year Projects deta hai BTech, BCA & MCA ke liye 🎓\n\n✅ Complete source code\n✅ Circuit diagrams & connections\n✅ Documentation + PPT\n✅ Live 1-on-1 explanation" },
-        { match: /demo|book|free/i, reply: "Free demo class book karne ke liye share karein:\n• Aapka naam\n• Phone number\n• Program\n\nYa call/WhatsApp: +91 96168 81048" },
-        { match: /price|cost|fee|charge/i, reply: "Aethelbotics pricing 👇\n💻 Programming Kit — ₹1,499\n⚡ Electronics Kit — ₹1,999\n📡 IoT Kit — ₹2,999\n🏫 STEM Lab for Schools — ₹2,00,000" },
-        { match: /class|grade/i, reply: "Aethelbotics Class 1–12 students ko padhata hai 🎒\n\n• Class 1–5: Junior Robotics\n• Class 6–8: Robotics Foundation\n• Class 9–12: Advanced Robotics & IoT" },
-        { match: /contact|call|phone|whatsapp|number/i, reply: "📞 +91 96168 81048\n📧 atulsrivastava1246@gmail.com\n📸 Instagram: @aethelbotics5331\n\nMon–Sat, 9 AM – 8 PM" },
+        { match: /esp32/i, reply: "ESP32 IoT Starter Kit 📡\n\n17 components:\n• ESP32 DevKit Board\n• OLED Display, DHT22, Ultrasonic, PIR\n• MQ-2, LDR, Soil Moisture\n• Servo, Relay + more\n\nBuild 12+ IoT projects with Wi-Fi + Bluetooth!" },
+        { match: /arduino/i, reply: "Arduino IoT Kit 💻\n\n13 components:\n• Arduino Uno R3 (Made in India)\n• Breadboard + Jumper Wires\n• DHT11, Ultrasonic, PIR, MQ-2\n• LDR, Soil Moisture, Servo, Relay\n\nPerfect for beginners!" },
+        { match: /stem|lab|school|basic|premium|2\.?5|5 ?lakh|500000|250000/i, reply: "STEM Labs for Schools 🏫\n\n📘 Basic Lab — ₹2,50,000\n• Arduino IoT Kits (10 sets)\n• Basic sensors + curriculum\n• 1-Year support\n\n⭐ Premium Lab — ₹5,00,000\n• Arduino + ESP32 Kits (20 sets)\n• Advanced sensors + AI modules\n• 2-Year support + mentorship\n\nCustom packages available!" },
+        { match: /kit/i, reply: "2 Kits 👇\n📡 ESP32 IoT Starter Kit\n💻 Arduino IoT Kit\n\nHar kit me hardware + manuals + video tutorials + lifetime mentor support." },
+        { match: /project|final ?year|btech|mca|bca/i, reply: "Final Year Projects 🎓\n\n✅ Complete source code\n✅ Circuit diagrams\n✅ Documentation + PPT\n✅ Live 1-on-1 explanation" },
+        { match: /demo|book|free/i, reply: "Free demo class book karne ke liye share karein:\n• Aapka naam\n• Phone number\n• Program\n\nYa call: +91 96168 81048" },
+        { match: /contact|call|phone|whatsapp|number/i, reply: "📞 +91 96168 81048\n📧 atulsrivastava1246@gmail.com\n📸 @aethelbotics5331\n\nMon–Sat, 9 AM – 8 PM" },
         { match: /hello|hi|hey|namaste/i, reply: "Namaste! 🙏 Aethelbotics me aapka swagat hai. Main Aethe Bot hun. Kaise help kar sakta hun?" },
-        { match: /thank|thanks|dhanyavad/i, reply: "Aapka swagat hai! 😊 Happy learning! 🚀" },
-        { match: /social|instagram|facebook|linkedin|follow/i, reply: "Follow us 👇\n📸 instagram.com/aethelbotics5331\n📘 Facebook: @atul srivastav\n💼 LinkedIn: atul-srivastav-476b282b3" }
+        { match: /thank|thanks|dhanyavad/i, reply: "Aapka swagat hai! 😊 Happy learning! 🚀" }
     ];
-
     function addMsg(text, who = 'bot') {
         const div = document.createElement('div');
         div.className = 'msg ' + who;
@@ -1625,7 +1507,7 @@ function isToday(iso) {
     }
     function getReply(text) {
         for (const r of replies) if (r.match.test(text)) return r.reply;
-        return "Hmm, ye samajh nahi aaya 🤔\n\nAap puch sakte hain:\n• Kits\n• STEM Labs\n• Final Year Projects\n• Pricing & Demo\n\nYa call: +91 96168 81048";
+        return "Hmm, ye samajh nahi aaya 🤔\n\nAap puch sakte hain:\n• Kits (ESP32 / Arduino)\n• STEM Labs (Basic / Premium)\n• Final Year Projects\n• Pricing & Demo\n\nYa call: +91 96168 81048";
     }
     function send(text) {
         text = (text || '').trim();
@@ -1633,78 +1515,41 @@ function isToday(iso) {
         addMsg(text, 'user');
         input.value = '';
         const typing = addTyping();
-        setTimeout(() => {
-            typing.remove();
-            addMsg(getReply(text), 'bot');
-        }, 700 + Math.random() * 500);
+        setTimeout(() => { typing.remove(); addMsg(getReply(text), 'bot'); }, 700 + Math.random() * 500);
     }
     function openChat() {
         win.classList.add('open');
         if (notif) notif.style.display = 'none';
-        if (!opened) {
-            opened = true;
-            setTimeout(() => addMsg("Hi! 👋 Main Aethe Bot hun — Aethelbotics se.\n\nKaise help kar sakta hun?", 'bot'), 300);
-        }
+        if (!opened) { opened = true; setTimeout(() => addMsg("Hi! 👋 Main Aethe Bot hun — Aethelbotics se.\n\nKaise help kar sakta hun?", 'bot'), 300); }
         setTimeout(() => input.focus(), 400);
     }
     function closeChat() { win.classList.remove('open'); }
-
-    fab.addEventListener('click', () => {
-        win.classList.contains('open') ? closeChat() : openChat();
-    });
+    fab.addEventListener('click', () => { win.classList.contains('open') ? closeChat() : openChat(); });
     closeEl?.addEventListener('click', closeChat);
     sendBtn?.addEventListener('click', () => send(input.value));
-    input?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') { e.preventDefault(); send(input.value); }
-    });
-    quick?.addEventListener('click', (e) => {
-        const btn = e.target.closest('button');
-        if (btn && btn.dataset.q) send(btn.dataset.q);
-    });
+    input?.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); send(input.value); } });
+    quick?.addEventListener('click', (e) => { const btn = e.target.closest('button'); if (btn && btn.dataset.q) send(btn.dataset.q); });
 })();
 
 /* ADMIN PANEL */
 (function initAdmin() {
-    const adminBtn    = $('#adminBtn');
-    const adminBadge  = $('#adminBadge');
-    const loginBk     = $('#loginBackdrop');
-    const loginClose  = $('#loginClose');
-    const loginForm   = $('#loginForm');
-    const userInput   = $('#adminUsername');
-    const pwdInput    = $('#adminPassword');
-    const togglePwd   = $('#togglePwd');
-    const rememberMe  = $('#rememberMe');
-    const attemptsEl  = $('#loginAttempts');
-    const dashboard   = $('#adminDashboard');
-    const dashClose   = $('#dashClose');
-    const logoutBtn   = $('#logoutBtn');
-    const exportBtn   = $('#exportCsv');
-    const searchInput = $('#adminSearch');
-    const filterSel   = $('#adminFilter');
-    const tableBody   = $('#adminTableBody');
-    const emptyState  = $('#adminEmpty');
-
-    const statTotal     = $('#statTotal');
-    const statNew       = $('#statNew');
-    const statContacted = $('#statContacted');
-    const statToday     = $('#statToday');
-
+    const adminBtn = $('#adminBtn'), adminBadge = $('#adminBadge');
+    const loginBk = $('#loginBackdrop'), loginClose = $('#loginClose'), loginForm = $('#loginForm');
+    const userInput = $('#adminUsername'), pwdInput = $('#adminPassword'), togglePwd = $('#togglePwd');
+    const rememberMe = $('#rememberMe'), attemptsEl = $('#loginAttempts');
+    const dashboard = $('#adminDashboard'), dashClose = $('#dashClose'), logoutBtn = $('#logoutBtn');
+    const exportBtn = $('#exportCsv'), searchInput = $('#adminSearch'), filterSel = $('#adminFilter');
+    const tableBody = $('#adminTableBody'), emptyState = $('#adminEmpty');
+    const statTotal = $('#statTotal'), statNew = $('#statNew'), statContacted = $('#statContacted'), statToday = $('#statToday');
     if (!adminBtn || !loginBk || !dashboard) return;
-    let isLoggedIn = false;
-    let failedAttempts = 0;
-
-    try {
-        const saved = localStorage.getItem('aethelbotics_admin_user');
-        if (saved && userInput) userInput.value = saved;
-    } catch {}
-
+    let isLoggedIn = false, failedAttempts = 0;
+    try { const saved = localStorage.getItem('aethelbotics_admin_user'); if (saved && userInput) userInput.value = saved; } catch {}
     togglePwd?.addEventListener('click', () => {
         const isPwd = pwdInput.type === 'password';
         pwdInput.type = isPwd ? 'text' : 'password';
         const icon = togglePwd.querySelector('use');
         if (icon) icon.setAttribute('href', isPwd ? '#i-eye-off' : '#i-eye');
     });
-
     window.updateAdminBadge = function () {
         const list = loadEnquiries();
         const newCount = list.filter(x => x.status === 'new').length;
@@ -1713,40 +1558,21 @@ function isToday(iso) {
             else adminBadge.classList.add('hidden');
         }
     };
-
     adminBtn.addEventListener('click', () => {
         if (isLoggedIn) openDashboard();
-        else {
-            loginBk.classList.add('open');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => userInput?.focus(), 250);
-        }
+        else { loginBk.classList.add('open'); document.body.style.overflow = 'hidden'; setTimeout(() => userInput?.focus(), 250); }
     });
-
-    function closeLogin() {
-        loginBk.classList.remove('open');
-        document.body.style.overflow = '';
-        if (pwdInput) pwdInput.value = '';
-        if (attemptsEl) attemptsEl.textContent = '';
-    }
+    function closeLogin() { loginBk.classList.remove('open'); document.body.style.overflow = ''; if (pwdInput) pwdInput.value = ''; if (attemptsEl) attemptsEl.textContent = ''; }
     loginClose?.addEventListener('click', closeLogin);
     loginBk.addEventListener('click', (e) => { if (e.target === loginBk) closeLogin(); });
-
     loginForm?.addEventListener('submit', (e) => {
         e.preventDefault();
-        const u = (userInput?.value || '').trim();
-        const p = (pwdInput?.value || '').trim();
-
+        const u = (userInput?.value || '').trim(), p = (pwdInput?.value || '').trim();
         if (u === ADMIN_USERNAME && p === ADMIN_PASSWORD) {
-            isLoggedIn = true;
-            failedAttempts = 0;
-            if (rememberMe?.checked) {
-                try { localStorage.setItem('aethelbotics_admin_user', u); } catch {}
-            } else {
-                try { localStorage.removeItem('aethelbotics_admin_user'); } catch {}
-            }
-            closeLogin();
-            toast('Welcome back, Atul! 🔓', 'success');
+            isLoggedIn = true; failedAttempts = 0;
+            if (rememberMe?.checked) { try { localStorage.setItem('aethelbotics_admin_user', u); } catch {} }
+            else { try { localStorage.removeItem('aethelbotics_admin_user'); } catch {} }
+            closeLogin(); toast('Welcome back, Atul! 🔓', 'success');
             setTimeout(openDashboard, 300);
         } else {
             failedAttempts++;
@@ -1758,73 +1584,41 @@ function isToday(iso) {
                 toast('Too many failed attempts. Please wait 30s.', 'error');
                 const btn = loginForm.querySelector('button[type="submit"]');
                 btn.disabled = true;
-                setTimeout(() => {
-                    btn.disabled = false;
-                    failedAttempts = 0;
-                    if (attemptsEl) attemptsEl.textContent = '';
-                }, 30000);
+                setTimeout(() => { btn.disabled = false; failedAttempts = 0; if (attemptsEl) attemptsEl.textContent = ''; }, 30000);
             }
         }
     });
-
-    function openDashboard() {
-        dashboard.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        renderTable();
-        updateStats();
-    }
-    function closeDashboard() {
-        dashboard.classList.remove('open');
-        document.body.style.overflow = '';
-    }
+    function openDashboard() { dashboard.classList.add('open'); document.body.style.overflow = 'hidden'; renderTable(); updateStats(); }
+    function closeDashboard() { dashboard.classList.remove('open'); document.body.style.overflow = ''; }
     dashClose?.addEventListener('click', closeDashboard);
-    logoutBtn?.addEventListener('click', () => {
-        isLoggedIn = false;
-        closeDashboard();
-        toast('Logged out successfully.', 'info');
-    });
-
+    logoutBtn?.addEventListener('click', () => { isLoggedIn = false; closeDashboard(); toast('Logged out successfully.', 'info'); });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (loginBk.classList.contains('open')) closeLogin();
             if (dashboard.classList.contains('open')) closeDashboard();
         }
     });
-
     function updateStats() {
         const list = loadEnquiries();
-        if (statTotal)     statTotal.textContent     = list.length;
-        if (statNew)       statNew.textContent       = list.filter(x => x.status === 'new').length;
+        if (statTotal) statTotal.textContent = list.length;
+        if (statNew) statNew.textContent = list.filter(x => x.status === 'new').length;
         if (statContacted) statContacted.textContent = list.filter(x => x.status === 'contacted').length;
-        if (statToday)     statToday.textContent     = list.filter(x => isToday(x.date)).length;
+        if (statToday) statToday.textContent = list.filter(x => isToday(x.date)).length;
         window.updateAdminBadge();
     }
-
     function renderTable() {
         if (!tableBody) return;
         const list = loadEnquiries();
         const q = (searchInput?.value || '').toLowerCase().trim();
         const filter = filterSel?.value || 'all';
-
         const filtered = list.filter(item => {
             if (filter !== 'all' && item.status !== filter) return false;
             if (!q) return true;
-            return (
-                (item.name || '').toLowerCase().includes(q) ||
-                (item.email || '').toLowerCase().includes(q) ||
-                (item.phone || '').toLowerCase().includes(q) ||
-                (item.program || '').toLowerCase().includes(q) ||
-                (item.message || '').toLowerCase().includes(q)
-            );
+            return ((item.name||'').toLowerCase().includes(q) || (item.email||'').toLowerCase().includes(q) || (item.phone||'').toLowerCase().includes(q) || (item.program||'').toLowerCase().includes(q) || (item.message||'').toLowerCase().includes(q));
         });
-
         tableBody.innerHTML = '';
-        if (!filtered.length) {
-            if (emptyState) emptyState.classList.add('show');
-            return;
-        }
+        if (!filtered.length) { if (emptyState) emptyState.classList.add('show'); return; }
         if (emptyState) emptyState.classList.remove('show');
-
         filtered.forEach((item, idx) => {
             const tr = document.createElement('tr');
             const statusClass = 'status-' + (item.status || 'new');
@@ -1832,37 +1626,23 @@ function isToday(iso) {
             tr.innerHTML = `
                 <td class="col-idx">${idx + 1}</td>
                 <td class="col-name"><b>${escapeHtml(item.name)}</b></td>
-                <td class="col-contact">
-                    <a href="tel:${escapeHtml(item.phone)}">${escapeHtml(item.phone)}</a>
-                    <a href="mailto:${escapeHtml(item.email)}">${escapeHtml(item.email)}</a>
-                </td>
+                <td class="col-contact"><a href="tel:${escapeHtml(item.phone)}">${escapeHtml(item.phone)}</a><a href="mailto:${escapeHtml(item.email)}">${escapeHtml(item.email)}</a></td>
                 <td class="col-prog">${escapeHtml(item.program || '—')}</td>
                 <td class="col-msg">${escapeHtml(item.message || '—')}</td>
                 <td class="col-date">${formatDate(item.date)}</td>
                 <td><span class="status-pill ${statusClass}">${statusLabel}</span></td>
-                <td>
-                    <div class="row-actions">
-                        <button class="row-action act-contact" data-act="contacted" data-id="${item.id}" title="Mark Contacted">
-                            <svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </button>
-                        <button class="row-action act-close" data-act="closed" data-id="${item.id}" title="Mark Closed">
-                            <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        </button>
-                        <button class="row-action act-del" data-act="delete" data-id="${item.id}" title="Delete">
-                            <svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                        </button>
-                    </div>
-                </td>
-            `;
+                <td><div class="row-actions">
+                    <button class="row-action act-contact" data-act="contacted" data-id="${item.id}" title="Mark Contacted"><svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+                    <button class="row-action act-close" data-act="closed" data-id="${item.id}" title="Mark Closed"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                    <button class="row-action act-del" data-act="delete" data-id="${item.id}" title="Delete"><svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                </div></td>`;
             tableBody.appendChild(tr);
         });
     }
-
     tableBody?.addEventListener('click', (e) => {
         const btn = e.target.closest('.row-action');
         if (!btn) return;
-        const id  = btn.dataset.id;
-        const act = btn.dataset.act;
+        const id = btn.dataset.id, act = btn.dataset.act;
         let list = loadEnquiries();
         if (act === 'delete') {
             if (!confirm('Delete this enquiry?')) return;
@@ -1874,45 +1654,30 @@ function isToday(iso) {
             saveEnquiries(list);
             toast(`Marked as ${act}.`, 'success');
         }
-        renderTable();
-        updateStats();
+        renderTable(); updateStats();
     });
-
     searchInput?.addEventListener('input', renderTable);
     filterSel?.addEventListener('change', renderTable);
-
     exportBtn?.addEventListener('click', () => {
         const list = loadEnquiries();
         if (!list.length) { toast('No enquiries to export.', 'info'); return; }
         const headers = ['Date', 'Name', 'Phone', 'Email', 'Program', 'Message', 'Status'];
-        const rows = list.map(x => [
-            formatDate(x.date),
-            x.name, x.phone, x.email,
-            x.program, x.message || '', x.status || 'new'
-        ]);
-        const csv = [headers, ...rows]
-            .map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','))
-            .join('\n');
+        const rows = list.map(x => [formatDate(x.date), x.name, x.phone, x.email, x.program, x.message || '', x.status || 'new']);
+        const csv = [headers, ...rows].map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
         const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-        const url  = URL.createObjectURL(blob);
-        const a    = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
         a.href = url;
         a.download = `aethelbotics-enquiries-${new Date().toISOString().slice(0, 10)}.csv`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
         URL.revokeObjectURL(url);
         toast('CSV exported successfully!', 'success');
     });
-
     updateAdminBadge();
     window.addEventListener('storage', updateAdminBadge);
 })();
 
-/* INIT */
-window.addEventListener('load', () => {
-    if (typeof window.updateAdminBadge === 'function') window.updateAdminBadge();
-});
+window.addEventListener('load', () => { if (typeof window.updateAdminBadge === 'function') window.updateAdminBadge(); });
 </script>
 </body>
 </html>
